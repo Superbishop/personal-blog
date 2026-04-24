@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Notes — Zhang Wei</title>
-  <meta name="description" content="Thoughts on design, engineering, and the craft of building software." />
+  <meta name="description" content="All notes: design, engineering, Python, SQL, web scraping, and more." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232997ff'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-size='18' font-weight='700' fill='white'%3EZ%3C/text%3E%3C/svg%3E" />
 </head>
@@ -32,159 +32,258 @@
 
   <header class="page-header">
     <h1 class="page-header__title">Notes</h1>
-    <p class="page-header__desc">Writing on design systems, frontend engineering, and building software with intention.</p>
+    <p class="page-header__desc">All writing — design, engineering, learning notes, and experiments, from 2019 to now.</p>
   </header>
 
   <div class="divider"></div>
 
+  <!-- Filter Bar -->
   <section class="section" style="padding-bottom: 0;">
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;" class="reveal">
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;" class="reveal">
       <button class="tag tag--active" data-filter="all">All</button>
-      <button class="tag" data-filter="design-systems">Design Systems</button>
-      <button class="tag" data-filter="engineering">Engineering</button>
-      <button class="tag" data-filter="accessibility">Accessibility</button>
-      <button class="tag" data-filter="typography">Typography</button>
-      <button class="tag" data-filter="strategy">Strategy</button>
-      <button class="tag" data-filter="ai">AI</button>
+      <button class="tag" data-filter="learning">学习笔记</button>
+      <button class="tag" data-filter="sql">SQL</button>
+      <button class="tag" data-filter="python">Python</button>
+      <button class="tag" data-filter="spider">爬虫</button>
+      <button class="tag" data-filter="web">Web开发</button>
+      <button class="tag" data-filter="tool">工具教程</button>
+      <button class="tag" data-filter="life">生活随笔</button>
     </div>
   </section>
 
   <section class="section">
 
-    <article class="card reveal" style="margin-bottom: 2.5rem; display: grid; grid-template-columns: 360px 1fr;" data-tags="design-systems">
-      <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=500&q=80" alt="Design Tokens"
-        style="aspect-ratio:16/10;object-fit:cover;border-radius:var(--radius-lg) 0 0 var(--radius-lg);" loading="lazy" />
-      <div style="padding: 2rem;">
-        <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
-          <span class="card__tag">Design Systems</span>
-          <span class="card__tag">Featured</span>
-        </div>
-        <h2 style="font-size:clamp(1.3rem,2.5vw,1.75rem);font-weight:700;letter-spacing:-0.03em;line-height:1.2;margin-bottom:0.75rem;">
-          Why Design Tokens Are the Foundation of a Great Design System
-        </h2>
-        <p style="font-size:0.9375rem;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.25rem;">
-          Design tokens bridge the gap between design files and code. They are the single source of truth for every visual decision. But most teams get them wrong. Here is a framework for structuring tokens that scales.
-        </p>
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <span style="font-size:0.8125rem;color:var(--color-text-tertiary);font-family:var(--font-mono);">2026.04.18 · 12 min read</span>
-          <a href="#" class="card__link">Read note <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        </div>
+    <!-- Year Group: 2024 -->
+    <div class="reveal" style="margin-bottom: 2rem;">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:1.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--color-text-primary);">2024</span>
+        <div style="flex:1;height:1px;background:var(--color-border);"></div>
       </div>
-    </article>
+      <div style="display:grid;gap:0;max-width:760px;">
 
-    <div class="grid grid--2 stagger" id="notes-grid">
+        <a href="posts/pixel/effects-showcase.html" class="note-item" data-cats="web tool" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2024.03</span>
+          <div>
+            <h3 class="note-item__title">网页效果展示 · Effect Gallery</h3>
+            <p class="note-item__excerpt">CSS动画、交互效果展示与关键词指南，Hover、点击或滚动体验各种网页交互效果。</p>
+            <div class="note-item__tags"><span class="tag">Web开发</span><span class="tag">工具教程</span><span class="tag">CSS动画</span></div>
+          </div>
+        </a>
 
-      <article class="card reveal" data-tags="accessibility engineering">
-        <div class="card__body">
-          <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
-            <span class="card__tag">Accessibility</span><span class="card__tag">Engineering</span>
+        <a href="posts/pixel/labor-law.html" class="note-item" data-cats="tool" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2024.02</span>
+          <div>
+            <h3 class="note-item__title">打工人劳动法手册 · 官方全文</h3>
+            <p class="note-item__excerpt">收录《劳动法》全文，支持模糊搜索与场景快速定位，供打工人参考使用。</p>
+            <div class="note-item__tags"><span class="tag">工具教程</span><span class="tag">劳动法</span></div>
           </div>
-          <h3 class="card__title">Building Accessible Components from the Ground Up</h3>
-          <p class="card__desc">ARIA attributes are a patch, not a fix. Accessibility starts at the design phase, not the QA phase. A practical guide to building components that work for everyone.</p>
-          <div class="card__footer">
-            <span class="card__date">2026.04.10 · 8 min read</span>
-            <a href="#" class="card__link">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
+        </a>
 
-      <article class="card reveal" data-tags="strategy engineering">
-        <div class="card__body">
-          <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
-            <span class="card__tag">Strategy</span><span class="card__tag">Engineering</span>
+        <a href="posts/pixel/docker-tutorial.html" class="note-item" data-cats="tool" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2024.02</span>
+          <div>
+            <h3 class="note-item__title">Docker 完全指南 - 互动式学习</h3>
+            <p class="note-item__excerpt">从零掌握容器技术，通过互动式教程边学边练，深入理解 Docker 核心概念与实战技巧。</p>
+            <div class="note-item__tags"><span class="tag">工具教程</span><span class="tag">Docker</span></div>
           </div>
-          <h3 class="card__title">The Case for Boring Technology in Startups</h3>
-          <p class="card__desc">Hot new frameworks are fun. Stable, well-understood tools keep you in business. A pragmatic guide to choosing technology that won't leave you stranded.</p>
-          <div class="card__footer">
-            <span class="card__date">2026.03.28 · 6 min read</span>
-            <a href="#" class="card__link">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
+        </a>
 
-      <article class="card reveal" data-tags="typography design-systems">
-        <div class="card__body">
-          <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
-            <span class="card__tag">Typography</span><span class="card__tag">Design Systems</span>
+        <a href="posts/pixel/post-1.html" class="note-item" data-cats="web" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2024.01</span>
+          <div>
+            <h3 class="note-item__title">像素艺术入门指南</h3>
+            <p class="note-item__excerpt">像素艺术是一种数字艺术形式，通过将图像分解为小的方形像素单元来创建图像，起源于早期电子游戏时代。</p>
+            <div class="note-item__tags"><span class="tag">Web开发</span><span class="tag">教程</span></div>
           </div>
-          <h3 class="card__title">Typography as Interface: Lessons from Apple San Francisco</h3>
-          <p class="card__desc">How a typeface becomes a design language — and why the details between the letters matter most. An analysis of Apple typographic system.</p>
-          <div class="card__footer">
-            <span class="card__date">2026.03.15 · 10 min read</span>
-            <a href="#" class="card__link">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
+        </a>
 
-      <article class="card reveal" data-tags="ai engineering">
-        <div class="card__body">
-          <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
-            <span class="card__tag">AI</span><span class="card__tag">Engineering</span>
-          </div>
-          <h3 class="card__title">What LLMs Get Wrong About Component APIs</h3>
-          <p class="card__desc">AI-generated code tends to produce technically correct but practically useless components. Here is why that happens and how to prompt your way out of it.</p>
-          <div class="card__footer">
-            <span class="card__date">2026.03.02 · 7 min read</span>
-            <a href="#" class="card__link">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-tags="design-systems engineering">
-        <div class="card__body">
-          <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
-            <span class="card__tag">Design Systems</span><span class="card__tag">Engineering</span>
-          </div>
-          <h3 class="card__title">The Component API Design Principles I Wish I Had Known Earlier</h3>
-          <p class="card__desc">Compound components, prop ergonomics, polymorphism — the patterns that separate component libraries people love from ones they fight with daily.</p>
-          <div class="card__footer">
-            <span class="card__date">2026.02.20 · 15 min read</span>
-            <a href="#" class="card__link">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card reveal" data-tags="strategy">
-        <div class="card__body">
-          <div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">
-            <span class="card__tag">Strategy</span>
-          </div>
-          <h3 class="card__title">Selling Design Systems to Skeptical Engineers</h3>
-          <p class="card__desc">Another abstraction layer is the most common objection. How to frame design systems as empowerment, not bureaucracy, for engineering teams.</p>
-          <div class="card__footer">
-            <span class="card__date">2026.02.08 · 5 min read</span>
-            <a href="#" class="card__link">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          </div>
-        </div>
-      </article>
-
+      </div>
     </div>
 
-    <div class="text-center mt-lg reveal">
-      <button class="btn btn--secondary" id="load-more">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Load More Notes
-      </button>
-    </div>
-  </section>
+    <!-- Year Group: 2020 -->
+    <div class="reveal" style="margin-bottom: 2rem;">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:1.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--color-text-primary);">2020</span>
+        <div style="flex:1;height:1px;background:var(--color-border);"></div>
+      </div>
+      <div style="display:grid;gap:0;max-width:760px;">
 
-  <div class="divider"></div>
+        <a href="posts/2020-nian-7-8-yue-xue-xi-hui-gu/index.html" class="note-item" data-cats="learning life" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2020.08.11</span>
+          <div>
+            <h3 class="note-item__title">2020年7-8月学习回顾</h3>
+            <p class="note-item__excerpt">近期学习状态不佳，想转行数据分析但被各种帖子泼冷水。记录这段迷茫期的思考与挣扎。</p>
+            <div class="note-item__tags"><span class="tag">学习笔记</span><span class="tag">生活随笔</span></div>
+          </div>
+        </a>
 
-  <section class="section text-center">
-    <div class="reveal" style="max-width: 480px; margin: 0 auto;">
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="margin:0 auto 1rem;display:block;">
-        <rect width="40" height="40" rx="10" fill="var(--color-accent-light)"/>
-        <path d="M12 18l8 6 8-6M12 18v10h16V18" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      </svg>
-      <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:0.75rem;">Subscribe to my notes</h2>
-      <p style="font-size:0.9375rem;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.5rem;">
-        New essays on design and engineering, delivered occasionally. No spam, no marketing.
-      </p>
-      <form style="display:flex;gap:0.5rem;" onsubmit="return false;">
-        <input type="email" class="input" placeholder="your@email.com" style="flex:1;" />
-        <button type="submit" class="btn btn--primary">Subscribe</button>
-      </form>
+        <a href="posts/tong-ji-xue/index.html" class="note-item" data-cats="learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2020.08.06</span>
+          <div>
+            <h3 class="note-item__title">统计学</h3>
+            <p class="note-item__excerpt">统计学是收集、处理、分析、解释数据并从中得出结论的科学，包含描述统计法和推断统计法。</p>
+            <div class="note-item__tags"><span class="tag">学习笔记</span><span class="tag">统计学</span></div>
+          </div>
+        </a>
+
+        <a href="posts/ben-nu-she-lei-tai-tiao-zhan-quan-shi-jie-nan-ren-shi-nan-ren-jiu-jin-lai-ying-zhan-zhuan-zai/index.html" class="note-item" data-cats="life" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2020.07.10</span>
+          <div>
+            <h3 class="note-item__title">本女设擂台挑战全世界男人，是男人就进来应战！(转载)</h3>
+            <p class="note-item__excerpt">一个女孩设置的擂台挑战帖，记录了一场关于性别与认知的激烈讨论。</p>
+            <div class="note-item__tags"><span class="tag">生活随笔</span><span class="tag">转载</span></div>
+          </div>
+        </a>
+
+        <a href="posts/jin-qi-xue-xi-hui-gu/index.html" class="note-item" data-cats="learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2020.07.05</span>
+          <div>
+            <h3 class="note-item__title">近期学习回顾</h3>
+            <p class="note-item__excerpt">SQL过了一遍《SQL必知必会》，查询语句能熟练操作，但在牛客网刷题时前期还行，后期困难重重。</p>
+            <div class="note-item__tags"><span class="tag">学习笔记</span><span class="tag">SQL</span></div>
+          </div>
+        </a>
+
+        <a href="posts/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-7/index.html" class="note-item" data-cats="sql learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2020.06.07</span>
+          <div>
+            <h3 class="note-item__title">《SQL必知必会》学习笔记-2020-6-7</h3>
+            <p class="note-item__excerpt">SQL学习笔记第七天，持续积累查询与数据处理经验。</p>
+            <div class="note-item__tags"><span class="tag">SQL</span><span class="tag">学习笔记</span></div>
+          </div>
+        </a>
+
+        <a href="posts/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-6/index.html" class="note-item" data-cats="sql learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2020.06.06</span>
+          <div>
+            <h3 class="note-item__title">《SQL必知必会》学习笔记-2020-6-6</h3>
+            <p class="note-item__excerpt">SQL学习笔记第六天。</p>
+            <div class="note-item__tags"><span class="tag">SQL</span><span class="tag">学习笔记</span></div>
+          </div>
+        </a>
+
+        <a href="posts/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-5/index.html" class="note-item" data-cats="sql learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2020.06.05</span>
+          <div>
+            <h3 class="note-item__title">《SQL必知必会》学习笔记-2020-6-5</h3>
+            <p class="note-item__excerpt">SQL学习笔记第五天。</p>
+            <div class="note-item__tags"><span class="tag">SQL</span><span class="tag">学习笔记</span></div>
+          </div>
+        </a>
+
+        <a href="posts/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-4/index.html" class="note-item" data-cats="sql learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2020.06.04</span>
+          <div>
+            <h3 class="note-item__title">《SQL必知必会》学习笔记-2020-6-4</h3>
+            <p class="note-item__excerpt">SQL学习笔记第四天。</p>
+            <div class="note-item__tags"><span class="tag">SQL</span><span class="tag">学习笔记</span></div>
+          </div>
+        </a>
+
+      </div>
     </div>
+
+    <!-- Year Group: 2019 -->
+    <div class="reveal" style="margin-bottom: 2rem;">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <span style="font-size:1.25rem;font-weight:700;letter-spacing:-0.03em;color:var(--color-text-primary);">2019</span>
+        <div style="flex:1;height:1px;background:var(--color-border);"></div>
+      </div>
+      <div style="display:grid;gap:0;max-width:760px;">
+
+        <a href="posts/Ekr4wfa8m/index.html" class="note-item" data-cats="spider" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.12.03</span>
+          <div>
+            <h3 class="note-item__title">爬取豆瓣电影列表</h3>
+            <p class="note-item__excerpt">使用Python爬取豆瓣电影Top250列表数据，实战爬虫与数据解析技巧。</p>
+            <div class="note-item__tags"><span class="tag">爬虫</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+        <a href="posts/qlZcHAhor/index.html" class="note-item" data-cats="learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.09.10</span>
+          <div>
+            <h3 class="note-item__title">正则表达式</h3>
+            <p class="note-item__excerpt">正则表达式系统性学习笔记，涵盖常见模式匹配规则与实战应用场景。</p>
+            <div class="note-item__tags"><span class="tag">学习笔记</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+        <a href="posts/UxeS8jyWy/index.html" class="note-item" data-cats="spider" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.07.17</span>
+          <div>
+            <h3 class="note-item__title">爬虫与反爬虫对抗策略</h3>
+            <p class="note-item__excerpt">系统梳理爬虫技术与反爬虫机制的对抗策略，理解双方博弈原理。</p>
+            <div class="note-item__tags"><span class="tag">爬虫</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+        <a href="posts/o3jSS0M9C/index.html" class="note-item" data-cats="spider" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.07.17</span>
+          <div>
+            <h3 class="note-item__title">反爬虫机制2：代理IP爬去网站</h3>
+            <p class="note-item__excerpt">使用代理IP池绕过反爬虫限制的实战方法与注意事项。</p>
+            <div class="note-item__tags"><span class="tag">爬虫</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+        <a href="posts/l99V4EeeY/index.html" class="note-item" data-cats="spider learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.07.17</span>
+          <div>
+            <h3 class="note-item__title">处理GET请求</h3>
+            <p class="note-item__excerpt">Python requests库处理GET请求的详细笔记，含请求头、参数、超时等技巧。</p>
+            <div class="note-item__tags"><span class="tag">爬虫</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+        <a href="posts/zxPVKJyYZ/index.html" class="note-item" data-cats="spider" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.07.17</span>
+          <div>
+            <h3 class="note-item__title">自定义请求</h3>
+            <p class="note-item__excerpt">Python自定义HTTP请求处理器，深入理解 urllib 的使用技巧。</p>
+            <div class="note-item__tags"><span class="tag">爬虫</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+        <a href="posts/TbXZS3u2p/index.html" class="note-item" data-cats="spider learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.07.17</span>
+          <div>
+            <h3 class="note-item__title">自定义Opener以及全局Opener的创建方法</h3>
+            <p class="note-item__excerpt">Python urllib中自定义Opener与全局默认Opener的配置方法。</p>
+            <div class="note-item__tags"><span class="tag">爬虫</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+        <a href="posts/yzZXoI4C0/index.html" class="note-item" data-cats="spider" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.07.17</span>
+          <div>
+            <h3 class="note-item__title">反爬虫机制一</h3>
+            <p class="note-item__excerpt">常见反爬虫机制识别与应对方法，User-Agent、IP限制、验证码等。</p>
+            <div class="note-item__tags"><span class="tag">爬虫</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+        <a href="posts/3vAt6NvMi/index.html" class="note-item" data-cats="learning life" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.07.05</span>
+          <div>
+            <h3 class="note-item__title">Learning Summary 7-05</h3>
+            <p class="note-item__excerpt">日常学习总结，记录当日所学知识点与思考。</p>
+            <div class="note-item__tags"><span class="tag">学习笔记</span><span class="tag">生活随笔</span></div>
+          </div>
+        </a>
+
+        <a href="posts/learning-summary-6-14-2019/index.html" class="note-item" data-cats="learning" style="text-decoration:none;color:inherit;">
+          <span class="note-item__date">2019.06.16</span>
+          <div>
+            <h3 class="note-item__title">Learning Summary-6-14-2019</h3>
+            <p class="note-item__excerpt">Python学习笔记，f-string格式化、类定义、三引号文档字符串等基础内容。</p>
+            <div class="note-item__tags"><span class="tag">学习笔记</span><span class="tag">Python</span></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
   </section>
 
   <div class="divider"></div>
@@ -205,9 +304,9 @@
 
   <script>
     (function() {
-      const root = document.documentElement;
-      const btnDark = document.getElementById('btn-dark');
-      const btnLight = document.getElementById('btn-light');
+      var root = document.documentElement;
+      var btnDark = document.getElementById('btn-dark');
+      var btnLight = document.getElementById('btn-light');
       function applyTheme(theme) {
         root.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
@@ -219,32 +318,28 @@
           btnDark.classList.remove('theme-toggle__btn--active');
         }
       }
-      const saved = localStorage.getItem('theme');
+      var saved = localStorage.getItem('theme');
       if (saved) { applyTheme(saved); } else { applyTheme('dark'); }
-      btnDark.addEventListener('click', () => applyTheme('dark'));
-      btnLight.addEventListener('click', () => applyTheme('light'));
+      btnDark.addEventListener('click', function() { applyTheme('dark'); });
+      btnLight.addEventListener('click', function() { applyTheme('light'); });
     })();
 
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    );
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    // Scroll reveal
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
 
-    document.querySelectorAll('[data-filter]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-filter]').forEach((b) => b.classList.remove('tag--active'));
+    // Filter
+    document.querySelectorAll('[data-filter]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-filter]').forEach(function(b) { b.classList.remove('tag--active'); });
         btn.classList.add('tag--active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('[data-tags]').forEach((card) => {
-          card.style.display = (filter === 'all' || card.dataset.tags.includes(filter)) ? '' : 'none';
+        var filter = btn.dataset.filter;
+        document.querySelectorAll('[data-cats]').forEach(function(item) {
+          item.style.display = (filter === 'all' || item.dataset.cats.indexOf(filter) !== -1) ? '' : 'none';
         });
       });
-    });
-
-    document.getElementById('load-more').addEventListener('click', function () {
-      this.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Loading...';
-      setTimeout(() => { this.innerHTML = 'All notes loaded'; this.disabled = true; this.style.opacity='0.5'; this.style.cursor='default'; }, 1200);
     });
   </script>
 </body>

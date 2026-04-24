@@ -1,0 +1,3805 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="keywords" content="Bishop静态个人博客">
+<meta name="description" content="Live and learn. ">
+<meta name="theme-color" content="#000">
+<title>《SQL必知必会》学习笔记-2020-6-7 | Bishop</title>
+<link rel="shortcut icon" href="/favicon.ico?v=1624325806799">
+<link rel="stylesheet" href="/media/css/pisces.css">
+<link rel="stylesheet" href="/media/fonts/font-awesome.css">
+<link
+  href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
+  rel="stylesheet" type="text/css">
+
+<link href="/media/hljs/styles/default.css"
+  rel="stylesheet">
+
+<link rel="stylesheet" href="/styles/main.css">
+
+<script src="/media/hljs/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.0/velocity.ui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+  integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
+  integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
+  integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+
+
+
+
+  <meta name="description" content="《SQL必知必会》学习笔记-2020-6-7" />
+  <meta name="keywords" content="SQL,learn summary" />
+</head>
+
+<body>
+  <div class="head-top-line"></div>
+  <div class="header-box">
+    
+<div class="pisces">
+  <header class="header  ">
+    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+      <div class="nav-toggle" id="nav_toggle">
+        <div class="toggle-box">
+          <div class="line line-top"></div>
+          <div class="line line-center"></div>
+          <div class="line line-bottom"></div>
+        </div>
+      </div>
+      <div class="site-meta">       
+        <div class="site-title">
+          
+            <a href="/" class="brand">
+              <span>Bishop</span>
+            </a>  
+          
+        </div>
+        
+          <p class="subtitle">记录学习的点点滴滴</p>
+        
+      </div>
+      <nav class="site-nav" id="site_nav">
+        <ul id="nav_ul">
+          
+            
+            
+              
+            
+            <li class="nav-item ">
+              
+              
+                <a href="https://Superbishop.github.io/" target="_blank">
+                  <i class="fa fa-globe"></i> Homepage
+                </a>
+              
+            </li>
+          
+            
+            
+              
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/archives/" target="_blank">
+                  <i class="fa fa-archive"></i> Archives
+                </a>
+              
+            </li>
+          
+            
+            
+              
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/tags/" target="_blank">
+                  <i class="fa fa-tags"></i> Tags
+                </a>
+              
+            </li>
+          
+            
+            
+              
+            
+            <li class="nav-item ">
+              
+              
+                <a href="/post/about/" target="_blank">
+                  <i class="fa fa-user"></i> About
+                </a>
+              
+            </li>
+          
+          
+            
+              <li class="nav-item ">
+                <a href="/friends/" target="_self">
+                  
+                    <i class="fa fa-address-book"></i> 友情链接
+                  
+                </a>
+              </li>
+            
+          
+          
+            <li id="fa_search" class="nav-item">
+              <a href="javascript:void(0);">
+                <i class="fa fa-search"></i> <span class="language" data-lan="search">搜索</span>
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+
+<script type="text/javascript"> 
+ 
+  let showNav = true;
+
+  let navToggle = document.querySelector('#nav_toggle'),
+  siteNav = document.querySelector('#site_nav');
+  
+  function navClick() {
+    let sideBar = document.querySelector('.sidebar');
+    let navUl = document.querySelector('#nav_ul');
+    navToggle.classList.toggle('nav-toggle-active');
+    siteNav.classList.toggle('nav-menu-active');
+    if (siteNav.classList.contains('nav-menu-active')) {
+      siteNav.style = "height: " + (navUl.children.length * 42) +"px !important";
+    } else {
+      siteNav.style = "";
+    }
+  }
+
+  navToggle.addEventListener('click',navClick);  
+</script>
+  </div>
+  <div class="main-continer">
+    
+    <div
+      class="section-layout pisces ">
+      <div class="section-layout-wrapper">
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
+<div class="sidebar-wrapper box-shadow-wrapper bg-color">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name">Bishop</p>
+    
+    <div class="site-description right-motion">
+      
+      
+      
+        <p>爱睡觉</p>
+      
+        <p>爱做梦</p>
+      
+        <p>爱幻想</p>
+      
+      
+    </div>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">17</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">6</span>
+        <span class="site-item-stat-name language" data-lan="category">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">6</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+    
+      <div class="sidebar-item">
+        <span class="site-item-rss">
+            <i class="fa fa-rss"></i>
+            <a href="https://Superbishop.github.io/atom.xml" target="_blank">RSS</a>
+        </span>
+      </div>
+    
+  
+  
+    <div class="sidebar-item sidebar-item-social">
+      <div class="social-item">
+        
+          
+            <a href="">
+              <i class="fa fa-globe" title=""></i>
+            </a>
+          
+        
+        
+      </div>
+    </div>
+  
+
+
+
+</div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#like-%E6%93%8D%E4%BD%9C%E7%AC%A6">LIKE 操作符</a>
+<ul>
+<li><a href="#%E9%80%9A%E9%85%8D%E7%AC%A6wildcard">通配符（wildcard）</a></li>
+<li><a href="#%E7%99%BE%E5%88%86%E5%8F%B7%E9%80%9A%E9%85%8D%E7%AC%A6">百分号（%）通配符</a></li>
+<li><a href="#%E6%96%B9%E6%8B%AC%E5%8F%B7-%E9%80%9A%E9%85%8D%E7%AC%A6">方括号（[ ]）通配符</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E9%85%8D%E7%AC%A6%E7%9A%84%E6%8A%80%E5%B7%A7">使用通配符的技巧</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
+        
+      </div>
+    </div>
+  
+</div>
+<script>
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
+      }
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
+  }
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-7/">
+      《SQL必知必会》学习笔记-2020-6-7
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2020-06-07 20:45:56">2020-06-07</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
+      
+      
+      <a href="https://Superbishop.github.io/tag/sql/">
+        <span>SQL</span>
+      </a>、
+      
+      
+      
+      <a href="https://Superbishop.github.io/tag/B3Myw-CcF/">
+        <span>learn summary</span>
+      </a>
+      
+      
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>4<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>818<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+  </div>
+</section>
+            <div class="post-body next-md-body" id="post_body">
+              <p>#用通配符进行过滤</p>
+<h4 id="like-操作符">LIKE 操作符</h4>
+<h5 id="通配符wildcard">通配符（wildcard）</h5>
+<p>用来匹配值的一部分的特殊字符。</p>
+<p>为在搜索子句中使用通配符，必须使用LIKE 操作符。LIKE指示DBMS，后跟的搜索模式利用通配符匹配而不是简单的相等匹配进行比较。</p>
+<blockquote>
+<p>通配符搜索只能用于文本字段（字符串），非文本数据类型字段不能使用通配符搜索。</p>
+</blockquote>
+<h5 id="百分号通配符">百分号（%）通配符</h5>
+<p>最常使用的通配符是百分号（%）。在搜索串中，%表示任何字符出现任意次数.</p>
+<p>输入▼</p>
+<pre><code>SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE 'Fish%';
+</code></pre>
+<blockquote>
+<p>说明：Access 通配符<br>
+如果使用的是Microsoft Access，需要使用*而不是%。</p>
+</blockquote>
+<p>通配符可在搜索模式中的任意位置使用，并且可以使用多个通配符.</p>
+<p>输入▼</p>
+<pre><code>SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE '%bean bag%';
+</code></pre>
+<p>通配符也可以出现在搜索模式的中间，虽然这样做不太有用.</p>
+<p>输入▼</p>
+<pre><code>SELECT prod_name
+FROM Products
+WHERE prod_name LIKE 'F%y';
+</code></pre>
+<blockquote>
+<p>说明：请注意后面所跟的空格<br>
+包括Access 在内的许多DBMS 都用空格来填补字段的内容。</p>
+</blockquote>
+<blockquote>
+<p>注意：请注意NULL<br>
+通配符%看起来像是可以匹配任何东西，但有个例外，这就是NULL。<br>
+子句WHERE prod_name LIKE '%'不会匹配产品名称为NULL 的行。</p>
+</blockquote>
+<p>#####下划线（_）通配符</p>
+<p>另一个有用的通配符是下划线（_）。下划线的用途与%一样，但它只匹配<strong>单个字符</strong>，而不是多个字符。</p>
+<blockquote>
+<p>DB2 不支持通配符_。<br>
+如果使用的是Microsoft Access，需要使用?而不是_。</p>
+</blockquote>
+<p>对比一下两个例子,观察下划线与百分号通配符区别.</p>
+<ul>
+<li>输入▼</li>
+</ul>
+<pre><code>SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE '__ inch teddy bear';
+</code></pre>
+<p>​                输出▼</p>
+<pre><code>prod_id prod_name
+-------- --------------------
+BR02 12 inch teddy bear
+BR03 18 inch teddy bear
+</code></pre>
+<ul>
+<li>输入▼</li>
+</ul>
+<pre><code>SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE '% inch teddy bear';
+</code></pre>
+<p>​                 输出▼</p>
+<pre><code>prod_id prod_name
+-------- --------------------
+BR01 8 inch teddy bear
+BR02 12 inch teddy bear
+BNR3 18 inch teddy bear
+</code></pre>
+<p>与%能匹配0 个字符不同，_总是刚好匹配一个字符，不能多也不能少.</p>
+<h5 id="方括号-通配符">方括号（[ ]）通配符</h5>
+<p>方括号（[]）通配符用来指定一个字符集，它必须匹配指定位置（通配符的位置）的一个字符.</p>
+<blockquote>
+<p>说明：并不总是支持集合<br>
+与前面描述的通配符不一样，并不是所有DBMS 都支持用来创建集合<br>
+的[]。只有微软的Access 和SQL Server 支持集合。为确定你使用的<br>
+DBMS 是否支持集合，请参阅相应的文档。</p>
+</blockquote>
+<p>此通配符可以用前缀字符^（脱字号）来否定。</p>
+<p>如果使用的是Microsoft Access，需要用!而不是^来否定一个集合.</p>
+<p>NOT 操作符可得出类似的结果。^的唯一优点是在使用多个WHERE 子句时可以简化语法.</p>
+<h5 id="使用通配符的技巧">使用通配符的技巧</h5>
+<ul>
+<li>不要过度使用通配符。如果其他操作符能达到相同的目的，应该使用<br>
+其他操作符。</li>
+<li>在确实需要使用通配符时，也尽量不要把它们用在搜索模式的开始<br>
+处。把通配符置于开始处，搜索起来是最慢的。</li>
+<li>仔细注意通配符的位置。如果放错地方，可能不会返回想要的数据。</li>
+</ul>
+
+            </div>
+            
+              <div class="reward-btn">
+                <div class="reward-btn-text">赞赏</div>
+              </div>
+            
+            
+              <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong class="language" data-lan="author">本文作者：</strong>
+      Bishop
+    </li>
+    <li class="post-copyright-link">
+      <strong class="language" data-lan="link">本文链接：</strong>
+      <a href="https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-7/" title="《SQL必知必会》学习笔记-2020-6-7">https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-7/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong class="language" data-lan="copyright">版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+      <a href="https://Superbishop.github.io/tag/sql/"># SQL</a>
+    
+      <a href="https://Superbishop.github.io/tag/B3Myw-CcF/"># learn summary</a>
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
+      
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="近期学习回顾" href="https://Superbishop.github.io/post/jin-qi-xue-xi-hui-gu/">近期学习回顾</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="近期学习回顾" href="https://Superbishop.github.io/post/jin-qi-xue-xi-hui-gu/">上一篇</a>
+      
+    </div>
+    <div class="nav-next">
+      
+        <a class="nav-pc-next" title="《SQL必知必会》学习笔记-2020-6-6" href="https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-6/">《SQL必知必会》学习笔记-2020-6-6</a>
+        <a class="nav-mobile-next" title="《SQL必知必会》学习笔记-2020-6-6" href="https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-6/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
+      
+    </div>
+  </div>
+</div>
+            
+            
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '3bb4552eafc7c9ab4144',
+    clientSecret: 'f10e504a6ff8534bac9d2f34638c7b681cbf3763',
+    repo: 'superbishop.github.io',
+    owner: 'superbishop',
+    admin: ['superbishop'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+    
+    
+  
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-box">
+  <footer class="footer">
+    <div class="copyright">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | © 2019-2020 Theme By <a
+        href="https://github.com/hsxyhao/gridea-theme-next" target="_blank">HsxyHao</a>
+    </div>
+    <div class="poweredby">
+      
+    </div>
+  </footer>
+  
+  
+  <div class="pisces back-to-top" id="back_to_top">
+    <i class="fa fa-arrow-up"></i>
+    
+    <span class="scrollpercent">
+      <span id="back_to_top_text">0</span>%
+    </span>
+    
+  </div>
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <div class="aplayer" id="aplayer"></div>
+  <script>
+  let musics = JSON.parse('[]');
+  let mediaMusic = [];
+  for (let i = 0; i < musics.length; i++) {
+    let item = musics[i];
+    mediaMusic.push({
+      name: item.musicName,
+      artist: item.author,
+      url: item.musicLink,
+      lrc: item.lrc,
+      cover: item.cover
+    });
+  }
+
+  const ap = new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      lrcType: 3,
+      listFolded: false,
+      listMaxHeight: 90,
+      audio: mediaMusic
+  });
+  window.addEventListener('load', function() {
+    let postBody = document.querySelector('#post_body');
+    let hs = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+    postBody && hs.forEach(h => {
+      let helems = postBody.querySelectorAll(h);
+      if (helems.length > 0) {
+        helems.forEach(elem => {
+          elem.id = encodeURI(elem.id);
+        })
+      }
+    })
+  })
+  </script>
+
+
+  
+</div>
+<script>
+
+  let sideBarOpen = 'sidebar-open';
+  let body = document.body;
+  let back2Top = document.querySelector('#back_to_top'),
+    back2TopText = document.querySelector('#back_to_top_text'),
+    drawerBox = document.querySelector('#drawer_box'),
+    rightSideBar = document.querySelector('.sidebar'),
+    viewport = document.querySelector('body');
+
+  function scrollAnimation(currentY, targetY) {
+
+    let needScrollTop = targetY - currentY
+    let _currentY = currentY
+    setTimeout(() => {
+      const dist = Math.ceil(needScrollTop / 10)
+      _currentY += dist
+      window.scrollTo(_currentY, currentY)
+      if (needScrollTop > 10 || needScrollTop < -10) {
+        scrollAnimation(_currentY, targetY)
+      } else {
+        window.scrollTo(_currentY, targetY)
+      }
+    }, 1)
+  }
+
+  back2Top.addEventListener("click", function (e) {
+    scrollAnimation(document.scrollingElement.scrollTop, 0);
+    e.stopPropagation();
+    return false;
+  });
+
+  window.addEventListener('scroll', function (e) {
+    let percent = document.scrollingElement.scrollTop / (document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight) * 100;
+    if (percent > 1 && !back2Top.classList.contains('back-top-active')) {
+      back2Top.classList.add('back-top-active');
+    }
+    if (percent == 0) {
+      back2Top.classList.remove('back-top-active');
+    }
+    if (back2TopText) {
+      back2TopText.textContent = Math.floor(percent);
+    }
+  });
+
+
+  let hasCacu = false;
+  window.onresize = function () {
+    calcuHeight();
+  }
+
+  function calcuHeight() {
+    // 动态调整站点概览高度
+    if (!hasCacu && back2Top.classList.contains('pisces') || back2Top.classList.contains('gemini')) {
+      let sideBar = document.querySelector('.sidebar');
+      let navUl = document.querySelector('#site_nav');
+      sideBar.style = 'margin-top:' + (navUl.offsetHeight + navUl.offsetTop + 15) + 'px;';
+      hasCacu = true;
+    }
+  }
+  calcuHeight();
+
+  let open = false, MOTION_TIME = 300, RIGHT_MOVE_DIS = '320px';
+
+  if (drawerBox) {
+    let rightMotions = document.querySelectorAll('.right-motion');
+    let right = drawerBox.classList.contains('right');
+
+    let transitionDir = right ? "transition.slideRightIn" : "transition.slideLeftIn";
+
+    let openProp, closeProp;
+    if (right) {
+      openProp = {
+        paddingRight: RIGHT_MOVE_DIS
+      };
+      closeProp = {
+        paddingRight: '0px'
+      };
+    } else {
+      openProp = {
+        paddingLeft: RIGHT_MOVE_DIS
+      };
+      closeProp = {
+        paddingLeft: '0px'
+      };
+    }
+
+    drawerBox.onclick = function () {
+      open = !open;
+      window.Velocity(rightSideBar, 'stop');
+      window.Velocity(viewport, 'stop');
+      window.Velocity(rightMotions, 'stop');
+      if (open) {
+        window.Velocity(rightSideBar, {
+          width: RIGHT_MOVE_DIS
+        }, {
+          duration: MOTION_TIME,
+          begin: function () {
+            window.Velocity(rightMotions, transitionDir, {});
+          }
+        })
+        window.Velocity(viewport, openProp, {
+          duration: MOTION_TIME
+        });
+      } else {
+        window.Velocity(rightSideBar, {
+          width: '0px'
+        }, {
+          duration: MOTION_TIME,
+          begin: function () {
+            window.Velocity(rightMotions, {
+              opacity: 0
+            });
+          }
+        })
+        window.Velocity(viewport, closeProp, {
+          duration: MOTION_TIME
+        });
+      }
+      for (let i = 0; i < drawerBox.children.length; i++) {
+        drawerBox.children[i].classList.toggle('muse-line');
+      }
+      drawerBox.classList.toggle(sideBarOpen);
+    }
+  }
+
+  // 链接跳转
+  let newWindow = 'false'
+  if (newWindow === 'true') {
+    let links = document.querySelectorAll('.post-body a')
+    links.forEach(item => {
+      if (!item.classList.contains('btn')) {
+        item.setAttribute("target", "_blank");
+      }
+    })
+  }
+
+  let faSearch = document.querySelector('#fa_search');
+  faSearch.addEventListener('click', function () {
+    document.querySelector('#search_mask').style = ''
+  })
+
+  // 代码高亮
+  hljs.initHighlightingOnLoad();
+  
+  // 离开当前页title变化
+  var leaveTitle = "";
+  if (leaveTitle) {
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState == 'hidden') {
+        normal_title = document.title;
+        document.title = leaveTitle;
+      } else {
+        document.title = normal_title;
+      }
+    });
+  }
+
+</script>
+    <div class="light-box" id="light_box"></div>
+<script>
+  let imgs = document.querySelectorAll('.post-body img');
+  let lightBox = document.querySelector('#light_box');
+  lightBox.addEventListener('mousedown', (e) => {
+    e.preventDefault()
+  })
+  lightBox.addEventListener('mousewheel', (e) => {
+    e.preventDefault()
+  })
+  let width = window.innerWidth * 0.8;
+  lightBox.onclick = () => {
+    let img = lightBox.querySelector('img');
+    lightBox.style = '';
+    img && img.remove();
+  }
+  imgs.forEach(item => {
+    item.onclick = function (e) {
+      let lightImg = document.createElement('img');
+      lightImg.src = this.src;
+      lightBox.style = `height: 100%; opacity: 1; background-color: rgba(0, 0, 0, 0.5);cursor: zoom-out;`;
+      lightImg.style = `width: ${width}px;border-radius: 2px;`;
+      lightImg.onclick = function () {
+        lightBox.style = '';
+        this.remove();
+      }
+      lightBox.append(lightImg);
+    }
+  })
+</script>
+    <div class="reward-mask" style="display: none;">
+  <div class="reward-relative">
+    <span class="close" aria-hidden="true">x</span>
+    <div class="reward-body">
+      <h2>感谢您的支持，我会继续努力的!</h2>
+      <div class="reward-img-box">
+        <div style="position: relative; width: 140px; height: 140px;">
+          
+          
+            <img id="zfb" class="reward-img" src="\media\images\custom-zfbImg.JPG" alt="赞赏码">
+          
+          
+            <img id="wx" class="reward-img" src="\media\images\custom-wxImg.JPG" alt="赞赏码">
+          
+        </div>
+      </div>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip">打开微信扫一扫，即可进行扫码打赏哦</p>
+    </div>
+    <div class="bottom">
+      
+      <div id="zfbBtn" class="pay-text">
+        支付宝
+      </div>
+      
+      
+      <div id="wxBtn" class="pay-text">
+        微信支付
+      </div>
+      
+    </div>
+  </div>
+</div>
+<style>
+  .reward-mask {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #00000054;
+  }
+
+  .reward-relative {
+    position: relative;
+    width: 480px;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #fff;
+    top: 50%;
+    margin-top: -205px;
+  }
+
+  .reward-relative .close {
+    position: absolute;
+    right: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    color: #929292;
+  }
+
+  .reward-body {
+    padding: 40px 20px 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
+
+  .reward-btn {
+    text-align: center;
+  }
+
+  .reward-btn-text {
+    display: inline-block;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    background-color: #ff9734;
+    color: #FFF;
+    margin-top: 20px;
+  }
+
+  .pay-text {
+    margin-top: 10px;
+    padding: 10px;
+    flex: 1;
+    transition: all .2s linear;
+  }
+
+  .pay-text:hover {
+    background-color: #a5a5a536;
+  }
+
+  .reward-body h2 {
+    padding-top: 10px;
+    text-align: center;
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px;
+  }
+
+  .reward-body h2:after,
+  .reward-body h2:before {
+    font-family: Arial, Helvetica, sans-serif;
+    background: 0 0;
+    width: 0;
+    height: 0;
+    font-style: normal;
+    color: #eee;
+    font-size: 80px;
+    position: absolute;
+    top: 20px;
+  }
+
+  .reward-body h2:before {
+    content: '\201c';
+    left: 50px;
+  }
+
+  .reward-body h2:after {
+    content: '\201d';
+    right: 80px;
+  }
+
+  .reward-img-box {
+    display: inline-block;
+    padding: 10px;
+    border: 6px solid #ea5f00;
+    margin: 0 auto;
+    border-radius: 3px;
+    position: relative;
+  }
+
+  .reward-img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .reward-relative {
+      height: 100%;
+      top: 0px;
+      margin-top: 0;
+      width: auto;
+    }
+
+    .reward-relative .bottom {
+      flex-direction: column;
+    }
+
+    .reward-relative .pay-text {
+      width: 80%;
+      margin: 5px auto;
+      border: 1px solid silver;
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    .reward-body h2:after {
+      right: 40px;
+    }
+
+    .reward-body h2:after,
+    .reward-body h2:before {
+      font-size: 60px;
+    }
+
+    .reward-body h2:before {
+      left: 20px;
+    }
+  }
+</style>
+<script>
+  !function () {
+    var mask = document.querySelector('.reward-mask');
+    let close = document.querySelector('.reward-relative .close');
+    let rewardBtn = document.querySelector('.reward-btn');
+
+    let zfb = document.querySelector('#zfb'),
+      wx = document.querySelector('#wx'),
+      zfbBtn = document.querySelector('#zfbBtn'),
+      wxBtn = document.querySelector('#wxBtn');
+
+    if (zfbBtn && wxBtn) {
+      zfbBtn.addEventListener('click', () => {
+        window.Velocity(zfb, 'transition.slideLeftIn', {
+          duration: 400
+        });
+        window.Velocity(wx, 'transition.slideRightOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+
+      wxBtn.addEventListener('click', () => {
+        window.Velocity(wx, 'transition.slideRightIn', {
+          duration: 400
+        });
+        window.Velocity(zfb, 'transition.slideLeftOut', {
+          display: 'none',
+          duration: 400
+        });
+      });
+    }
+
+    rewardBtn.addEventListener('click', (e) => {
+      window.Velocity(mask, 'transition.slideDownIn', {
+        duration: 400
+      })
+    });
+
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.Velocity(mask, 'transition.slideUpOut', {
+        duration: 400
+      })
+    })
+  }()
+</script>
+
+  </div>
+</body>
+
+<div class="search-mask" id="search_mask" style="display: none;">
+  <div class="search-box">
+    <div class="search-title">
+      <i class="fa fa-search"></i>
+      <div class="input-box">
+        <input id="search" type="text" class="language" data-lan="search" placeholder="搜索">
+      </div>
+      <i id="close" class="fa fa-times-circle"></i>
+    </div>
+    <div class="stat-box">
+      <span id="stat_count">0</span><span class="language" data-lan="stat">条相关条目，使用了</span><span id="stat_times">0</span><span class="language" data-lan="stat-time">毫秒</span>
+      <hr>
+    </div>
+    <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/2020-nian-7-8-yue-xue-xi-hui-gu/"" data-c="
+          &lt;p&gt;近期学习状态不佳，无心学习，再次对自己的前途迷茫。&lt;/p&gt;
+&lt;p&gt;想要转行到数据分析，但网上各种泼冷水的帖子，看完让人无心继续下去。没错，我是一个容易被他人煽动的人，也容易被他人情绪影响的人，但是，这样学习下去，我真的看不到多大的希望，成效太低。&lt;/p&gt;
+&lt;p&gt;数据分析的学习，太多内容需要学习。是的，一开始看过来人的帖子，说要投入大量时间在《统计学》上面，因为统计学是数据分析的基石，没有统计学知识的垫底，很难进行系统深刻的数据分析，但看了一两遍书，无法很好的应用于实践，加之内容枯燥无趣，公式繁多，概念也很多，无法快速作出判断，遇到一类问题，该用何种分析方法。&lt;/p&gt;
+&lt;p&gt;是自己太笨了？是自己年龄上去，学习能力退化了？然而，我不想这么轻易放弃。&lt;/p&gt;
+&lt;p&gt;17年自学SQL语言，没坚持下去，今年花了两周给拿下，牛客网刷题也刷了一大半，自我感觉基础不是特别差，掌握的也不是特别差，可见有些东西一开始可能学不进去，学不懂，但过段时间，回头再去看，会有种恍然大悟之感，灵光一闪。&lt;/p&gt;
+&lt;p&gt;行吧，统计学最近学的自己有点厌学，可以换个知识点学习，比如Python结合panda等三个数据库，进行数据的整理和汇总分析，等这个掌握后，尝试从一个最简单的数据分析案例，结合统计学、SQL、Python来进行一场深度实战，提升自己的信心以及继续深入学习下去的动力，毕竟数据统计方法更加晦涩难懂，涉及到更多高深且跨学科的知识，比如神经学、生物学方面的知识点。&lt;/p&gt;
+&lt;p&gt;说句实话，这种跨学科的深度钻研学习东西的状态，很是享受，毕竟我一直是个爱学习的人，尤其是涉足新的知识领域，最近跟媳妇儿也提到自己想要快速入门神经科学领域，根据网上提出的方法进行实践，看自己能以尽快的速度掌握多么深度的神经学知识，并坦言会给她做一个分享。&lt;/p&gt;
+&lt;p&gt;有点扯远了，所以接下来一段时间的学习内容，就是Python的数据库工具，以及统计学方法。&lt;/p&gt;
+">2020年7-8月学习回顾</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/tong-ji-xue/"" data-c="
+          &lt;h2 id=&#34;第1章-导论&#34;&gt;第1章 导论&lt;/h2&gt;
+&lt;h3 id=&#34;统计学定义&#34;&gt;统计学定义&lt;/h3&gt;
+&lt;p&gt;统计学是收集/处理/分析/解释数据并从数据中得出结论的科学&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;数据收集&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数据处理&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数据分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;描述统计法&#34;&gt;描述统计法&lt;/h3&gt;
+&lt;p&gt;研究的是数据收集/处理/汇总/图表描述/概括分析等统计方法&lt;/p&gt;
+&lt;h3 id=&#34;推断统计法&#34;&gt;推断统计法&lt;/h3&gt;
+&lt;p&gt;研究如何利用样本数据来推断总体特征的统计方法&lt;/p&gt;
+&lt;h3 id=&#34;统计数据类型&#34;&gt;统计数据类型&lt;/h3&gt;
+&lt;h4 id=&#34;按计量尺度分类&#34;&gt;按计量尺度分类&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分类数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;顺序数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数值型数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;按收集方法分类&#34;&gt;按收集方法分类&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;观测数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实验数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;按时间状况分类&#34;&gt;按时间状况分类&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;截面数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;时间序列数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第2章-数据搜集&#34;&gt;第2章 数据搜集&lt;/h2&gt;
+&lt;h3 id=&#34;数据的来源&#34;&gt;数据的来源&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;间接来源&lt;br&gt;
+原信息已存在,对原信息进行加工/整理后用于统计分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;直接来源&lt;br&gt;
+通过调查方法/或实验获得数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;调查方法&#34;&gt;调查方法&lt;/h3&gt;
+&lt;h4 id=&#34;概率抽样&#34;&gt;概率抽样&lt;/h4&gt;
+&lt;p&gt;也称随机抽样,在遵循一定原则的基础上进行抽样&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;简单随机抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分层抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;整群抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;系统抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多阶段抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;非概率抽样&#34;&gt;非概率抽样&lt;/h4&gt;
+&lt;p&gt;抽取样本时不按随机原则,而是根据研究目的对数据的要求从总体抽出部分进行调查&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;方便抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;判断抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自愿样本&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;滚雪球抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配额抽样&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实验方法&#34;&gt;实验方法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;实验组&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对照组&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;数据的误差&#34;&gt;数据的误差&lt;/h3&gt;
+&lt;h4 id=&#34;抽样误差&#34;&gt;抽样误差&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;样本量:样本量越大,抽样误差越小&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;总体变异性:变异性越大,抽样误差越大&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;非抽样误差&#34;&gt;非抽样误差&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;抽样框误差&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回答误差&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;无回答误差&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调查员误差&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;测量误差&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第3章-数据的图表展示&#34;&gt;第3章 数据的图表展示&lt;/h2&gt;
+&lt;h3 id=&#34;数据预处理&#34;&gt;数据预处理&lt;/h3&gt;
+&lt;p&gt;对数据分类或分组前的所做的必要处理,包括审核/筛选/排序等&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据审核&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;直接来源得到的数据:审核数据的&lt;strong&gt;完整性&lt;/strong&gt;与&lt;strong&gt;正确性&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;间接来源得到的数据:审核数据的&lt;strong&gt;适用性&lt;/strong&gt;与&lt;strong&gt;时效性&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;数据筛选&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数据排序&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数据透视表&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;数据进一步整理与图表化&#34;&gt;数据进一步整理与图表化&lt;/h3&gt;
+&lt;p&gt;对品质数据主要做分类整理,数值型数据主要做分组整理&lt;/p&gt;
+&lt;h4 id=&#34;品质数据的整理与图表化&#34;&gt;品质数据的整理与图表化&lt;/h4&gt;
+&lt;h5 id=&#34;分类数据&#34;&gt;分类数据&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;汇总成频数分布表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;图表展示&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;条形图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;帕累托图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;饼图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;环形图&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;顺序数据&#34;&gt;顺序数据&lt;/h5&gt;
+&lt;p&gt;适用于分类数据的频数分布表和图示法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;累计频数分布表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;累计频数分布图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;向上累计&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;向下累计&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;数值型数据的整理与图表化&#34;&gt;数值型数据的整理与图表化&lt;/h5&gt;
+&lt;h6 id=&#34;数据分组&#34;&gt;数据分组&lt;/h6&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;单变量值分组--离散变量&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;组距分组--连续变量或多变量&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h6 id=&#34;数据图表化&#34;&gt;数据图表化&lt;/h6&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;分组数据&lt;/p&gt;
+&lt;p&gt;直方图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;未分组数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;茎叶图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;箱线图&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;时间序列数据&lt;/p&gt;
+&lt;p&gt;线图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多变量数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;散点图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;气泡图&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;雷达图&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第4章-数据的概括性度量&#34;&gt;第4章 数据的概括性度量&lt;/h2&gt;
+&lt;h3 id=&#34;集中趋势的度量&#34;&gt;集中趋势的度量&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;[[众数]]--分类数据,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;M_o&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.83333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10903em;&#34;&gt;M&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;o&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[[中位数]]--顺序数据,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;M_e&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.83333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10903em;&#34;&gt;M&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分位数--顺序数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;上四分位,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;Q&lt;/mi&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Q_u&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8777699999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;Q&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;u&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;下四分卫,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;Q&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Q_l&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8777699999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;Q&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;平均数--数值型数据&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;[[简单平均数]]--针对未分组数据,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mover accent=&#34;true&#34;&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;ˉ&lt;/mo&gt;&lt;/mover&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\bar x&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.56778em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord accent&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.56778em;&#34;&gt;&lt;span style=&#34;top:-3em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;x&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;accent-body&#34; style=&#34;left:-0.22222em;&#34;&gt;ˉ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[[加权平均数]]--针对分组数据，&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mover accent=&#34;true&#34;&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;ˉ&lt;/mo&gt;&lt;/mover&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\bar x&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.56778em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord accent&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.56778em;&#34;&gt;&lt;span style=&#34;top:-3em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;x&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;accent-body&#34; style=&#34;left:-0.22222em;&#34;&gt;ˉ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[[几何平均数]]--针对平均比率,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;G&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;G&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;G&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;众数是一组数据分布的峰值,不受极端值影响,缺点不具唯一性,适用于大量的分类数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;平均数是利用了全部数据信息而针对数值型数据计算得出的值,应用最广泛的集中趋势测度值.缺点:对于偏态分布较大的数据,代表性较差,采用中位数或众数代表较好.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;离散程度的度量&#34;&gt;离散程度的度量&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;[[异众比率]]--针对分类数据,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;V_r&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.83333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.22222em;&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.22222em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[[四分位差]]--针对顺序/数值型数据,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;Q&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Q_d&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8777699999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;Q&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;针对数值型数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;[[极差]],&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;R&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;R&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.00773em;&#34;&gt;R&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;[[平均差]],&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;M_d&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.83333em;vertical-align:-0.15em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10903em;&#34;&gt;M&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.33610799999999996em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;d&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;[[样本方差]],&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;s^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8141079999999999em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;[[样本标准差]],&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;s&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.43056em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;s&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;[[总体方差]],&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;E&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;E&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;E&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;[[总体标准差]],&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;σ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\sigma&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.43056em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;σ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;相对位置的度量&#34;&gt;相对位置的度量&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;[[标准分数]],也称标准化值,z分数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;经验法则,适合对称分布的数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切比雪夫不等式,适合非对称分布的数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;相对离散程度&#34;&gt;相对离散程度&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;[[离散系数]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;分布的形状&#34;&gt;分布的形状&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;[[偏态]]系数,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;K&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;SK&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.07153em;&#34;&gt;K&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;若数据分布对称,则SK等于0&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若SK大于1或小于-1,称为高度偏态分布&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若SK在0.5&lt;sub&gt;1或-1&lt;/sub&gt;-0.5,称为中等偏态分布&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;[[峰态]]系数,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;K&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;K&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.07153em;&#34;&gt;K&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;若一组数据服从标准正态分布,则K为0&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若K&amp;gt;0,为尖峰分布,数据分布更集中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;若K&amp;lt;0,为平峰分布,数据分布越分散&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第5章-概率与概率分布&#34;&gt;第5章 概率与概率分布&lt;/h2&gt;
+&lt;h3 id=&#34;随机事件及其概率&#34;&gt;随机事件及其概率&lt;/h3&gt;
+&lt;p&gt;随机事件,也叫偶然事件&lt;/p&gt;
+&lt;p&gt;必然事件&lt;/p&gt;
+&lt;p&gt;不可能事件&lt;/p&gt;
+&lt;h3 id=&#34;事件的概率&#34;&gt;事件的概率&lt;/h3&gt;
+&lt;h5 id=&#34;古典概率&#34;&gt;古典概率&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;结果有限&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;各结果出现可能性相同&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;统计概率&#34;&gt;统计概率&lt;/h5&gt;
+&lt;h5 id=&#34;主观概率&#34;&gt;主观概率&lt;/h5&gt;
+&lt;p&gt;决策者根据本人掌握信息对某个事件发生可能性做出的预判&lt;/p&gt;
+&lt;h3 id=&#34;离散型随机变量及其分布&#34;&gt;离散型随机变量及其分布&lt;/h3&gt;
+&lt;h5 id=&#34;变量&#34;&gt;变量&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;期望值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;方差与标准差&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;离散系数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;【财务应用中,常用来评估财务风险】&lt;/p&gt;
+&lt;h5 id=&#34;分布&#34;&gt;分布&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;二项分布,贝努里试验&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;泊松分布&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;连续型随机变量的概率分布&#34;&gt;连续型随机变量的概率分布&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;概率密度函数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;概率分布&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;正态分布&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;标准正态分布&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;【质量管理领域的六西格玛管理质量标准】&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第6章-统计量及其抽样分布&#34;&gt;第6章 统计量及其抽样分布&lt;/h2&gt;
+&lt;h3 id=&#34;统计量的概念&#34;&gt;统计量的概念&lt;/h3&gt;
+&lt;h3 id=&#34;抽样分布&#34;&gt;抽样分布&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\chi^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.008548em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; 分布&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;t&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.61508em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;t&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; 分布&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;F&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;F&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;F&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; 分布&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;样本均值分布与中心极限定理&#34;&gt;样本均值分布与中心极限定理&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第7章-参数估计&#34;&gt;第7章 参数估计&lt;/h2&gt;
+&lt;h3 id=&#34;参数估计的基本原理&#34;&gt;参数估计的基本原理&lt;/h3&gt;
+&lt;p&gt;·    估计量与估计值&lt;/p&gt;
+&lt;p&gt;·    点估计与区间估计&lt;/p&gt;
+&lt;p&gt;·    点估计需要给出点估计值的可靠性&lt;/p&gt;
+&lt;p&gt;·    区间估计需要构造置信区间&lt;/p&gt;
+&lt;p&gt;·    评价估计量的标准&lt;/p&gt;
+&lt;p&gt;·    无偏性&lt;/p&gt;
+&lt;p&gt;·    有效性&lt;/p&gt;
+&lt;p&gt;·    一致性&lt;/p&gt;
+&lt;p&gt;·    一个总体参数的区间估计&lt;/p&gt;
+&lt;p&gt;·    均值&lt;/p&gt;
+&lt;p&gt;·    大样本---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    小样本&lt;/p&gt;
+&lt;p&gt;·    正态分布,总体方差已知---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    正态分布,总体方差位置---&amp;gt;t分布&lt;/p&gt;
+&lt;p&gt;·    比例&lt;/p&gt;
+&lt;p&gt;·    大样本---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    方差&lt;/p&gt;
+&lt;p&gt;·    x2分布&lt;/p&gt;
+&lt;p&gt;·    两个总体参数的区间估计&lt;/p&gt;
+&lt;p&gt;·    均值差&lt;/p&gt;
+&lt;p&gt;·    独立大样本&lt;/p&gt;
+&lt;p&gt;·    样本1,2方差已知---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    样本1,2方差未知---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    独立小样本&lt;/p&gt;
+&lt;p&gt;·    总体正态分布&lt;/p&gt;
+&lt;p&gt;·    样本1,2方差已知---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    样本1,2方差未知&lt;/p&gt;
+&lt;p&gt;·    样本1方差等于样本2方差---&amp;gt;t分布&lt;/p&gt;
+&lt;p&gt;·    样本1方差不等于样本方差---&amp;gt;t分布&lt;/p&gt;
+&lt;p&gt;·    匹配样本---&amp;gt;t分布&lt;/p&gt;
+&lt;p&gt;·    比列差&lt;/p&gt;
+&lt;p&gt;·    独立大样本---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    方差比&lt;/p&gt;
+&lt;p&gt;·    F分布&lt;/p&gt;
+&lt;p&gt;·    样本量的确定&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第8章-假设检验&#34;&gt;第8章 假设检验&lt;/h2&gt;
+&lt;p&gt;###假设检验的基本问题&lt;/p&gt;
+&lt;p&gt;·    两类假设&lt;/p&gt;
+&lt;p&gt;·    原假设&lt;/p&gt;
+&lt;p&gt;·    备择假设&lt;/p&gt;
+&lt;p&gt;·    两类错误&lt;/p&gt;
+&lt;p&gt;·    弃真错误&lt;/p&gt;
+&lt;p&gt;·    取伪错误&lt;/p&gt;
+&lt;p&gt;·    假设检验的流程&lt;/p&gt;
+&lt;p&gt;·    提出假设&lt;/p&gt;
+&lt;p&gt;·    确定适当的检验统计量,计算其数值&lt;/p&gt;
+&lt;p&gt;·    统计决策&lt;/p&gt;
+&lt;p&gt;·    利用P值进行决策&lt;br&gt;
+能精确地反应决策的风险度​&lt;/p&gt;
+&lt;p&gt;·    单侧检验&lt;/p&gt;
+&lt;p&gt;·    左单侧检验,也称下限检验&lt;/p&gt;
+&lt;p&gt;·    右单侧检验,也称上限检验&lt;/p&gt;
+&lt;p&gt;·    一个总体参数的检验&lt;/p&gt;
+&lt;p&gt;·    均值&lt;/p&gt;
+&lt;p&gt;·    样本量大---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    样本量小,标准差已知,正态总体---&amp;gt;z分布&lt;/p&gt;
+&lt;p&gt;·    样本量小,保准查未知,正态总体---&amp;gt;t分布&lt;/p&gt;
+&lt;p&gt;·    比例&lt;/p&gt;
+&lt;p&gt;·    z分布&lt;/p&gt;
+&lt;p&gt;·    方差&lt;/p&gt;
+&lt;p&gt;·    X2分布&lt;/p&gt;
+&lt;p&gt;·    两个总体参数的检验&lt;/p&gt;
+&lt;p&gt;·    均值之差检验&lt;/p&gt;
+&lt;p&gt;·    方差已知或未知,样本量大---&amp;gt;z统计量&lt;/p&gt;
+&lt;p&gt;·    方差未知,样本量小---&amp;gt;t统计量&lt;/p&gt;
+&lt;p&gt;·    比例之差检验&lt;/p&gt;
+&lt;p&gt;·    z统计量&lt;/p&gt;
+&lt;p&gt;·    反差比检验&lt;/p&gt;
+&lt;p&gt;·    F统计量&lt;/p&gt;
+&lt;h2 id=&#34;第9章-分类数据分析&#34;&gt;第9章 分类数据分析&lt;/h2&gt;
+&lt;h3 id=&#34;分类数据-2&#34;&gt;分类数据&lt;/h3&gt;
+&lt;p&gt;分类数据是对事物进行分类的结果,特征是,不同数值描述了调查对象的不同特征.&lt;/p&gt;
+&lt;p&gt;分类数据的结果是频数,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\chi^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.008548em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;检验是对分类数据的频数进行分析的统计方法.&lt;/p&gt;
+&lt;h3 id=&#34;chi2统计量&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\chi^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.008548em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;统计量&lt;/h3&gt;
+&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;true&#34;&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mo&gt;∑&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/msub&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;/msub&gt;&lt;msup&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;/msub&gt;&lt;/mfrac&gt;&lt;/mstyle&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\displaystyle\chi^2= \sum \frac{(f_0-f_e)^2} {f_e}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.0585479999999998em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8641079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.113em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:2.371548em;vertical-align:-0.8804400000000001em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mop op-symbol large-op&#34; style=&#34;position:relative;top:-0.000004999999999977245em;&#34;&gt;∑&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.16666666666666666em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen nulldelimiter&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mfrac&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.491108em;&#34;&gt;&lt;span style=&#34;top:-2.314em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10764em;&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.23em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;frac-line&#34; style=&#34;border-bottom-width:0.04em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.677em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10764em;&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.30110799999999993em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10764em;&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8804400000000001em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;f_0&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8888799999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10764em;&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.30110799999999993em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;表示观察值频数,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;/msub&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;f_e&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8888799999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10764em;&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.151392em;&#34;&gt;&lt;span style=&#34;top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mathdefault mtight&#34;&gt;e&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.15em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;表示期望值频数&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\chi^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.008548em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;统计量有以下特征:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo&gt;⩾&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\chi^2 \geqslant 0&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.008548em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel amsrm&#34;&gt;⩾&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\chi^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.008548em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;  统计量分布与自由度有关&lt;/li&gt;
+&lt;li&gt;描述了观察值与期望值的接近程度&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;拟合优度检验&#34;&gt;拟合优度检验&lt;/h3&gt;
+&lt;p&gt;拟合优度检验是用&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\chi^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.008548em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; 统计量进行&lt;strong&gt;统计显著性检验&lt;/strong&gt;的重要内容之一&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;计算分类变量中各类别期望频数&lt;/li&gt;
+&lt;li&gt;对比期望频数与观察频数差异&lt;/li&gt;
+&lt;li&gt;判断是否是显著性差异,或者相关联&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;列联分析独立性检验&#34;&gt;列联分析:独立性检验&lt;/h3&gt;
+&lt;p&gt;拟合优度检验是针对一个分类变量的检验分析&lt;/p&gt;
+&lt;p&gt;独立性检验则可以针对两个分类变量进行检验分析,主要通过列联表的方式呈现,又称为列联分析&lt;/p&gt;
+&lt;h4 id=&#34;列联表&#34;&gt;列联表&lt;/h4&gt;
+&lt;p&gt;将两个以上的变量进行交叉分类的频数分布表&lt;/p&gt;
+&lt;h4 id=&#34;独立性检验&#34;&gt;独立性检验&lt;/h4&gt;
+&lt;p&gt;分析列联表中行变量和列表里是否相互独立&lt;/p&gt;
+&lt;h4 id=&#34;列联表中的相关测量&#34;&gt;列联表中的相关测量&lt;/h4&gt;
+&lt;h5 id=&#34;varphi-相关系数&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;φ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\varphi&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.625em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;φ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; 相关系数&lt;/h5&gt;
+&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;true&#34;&gt;&lt;mi&gt;φ&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msqrt&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/mrow&gt;&lt;/msqrt&gt;&lt;/mstyle&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\displaystyle\varphi=\sqrt{\chi^2/n}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.625em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;φ&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1.24em;vertical-align:-0.25612499999999994em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord sqrt&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.983875em;&#34;&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-3.2em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34; style=&#34;padding-left:1em;&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.740108em;&#34;&gt;&lt;span style=&#34;top:-2.9890000000000003em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-2.9438750000000002em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3.2em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;min-width:1.02em;height:1.28em;&#34;&gt;&lt;svg width=&#39;400em&#39; height=&#39;1.28em&#39; viewBox=&#39;0 0 400000 1296&#39; preserveAspectRatio=&#39;xMinYMin slice&#39;&gt;&lt;path d=&#39;M263,681c0.7,0,18,39.7,52,119c34,79.3,68.167,
+158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120c340,-704.7,510.7,-1060.3,512,-1067
+c4.7,-7.3,11,-11,19,-11H40000v40H1012.3s-271.3,567,-271.3,567c-38.7,80.7,-84,
+175,-136,283c-52,108,-89.167,185.3,-111.5,232c-22.3,46.7,-33.8,70.3,-34.5,71
+c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
+-252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
+s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.25612499999999994em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;n&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.43056em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; 为列联表中的总频数,即样本量&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;φ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\varphi&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.625em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;φ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;系数适合&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;×&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;2\times2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.72777em;vertical-align:-0.08333em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;×&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; 列联表,可以将系数控制在0~1范围&lt;/p&gt;
+&lt;h5 id=&#34;c系数&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;c&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.43056em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;c&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;系数&lt;/h5&gt;
+&lt;p&gt;又称列联相关系数,列联系数,主要用于列联表大于&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo&gt;×&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;2\times2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.72777em;vertical-align:-0.08333em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;×&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;情况&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;true&#34;&gt;&lt;mrow&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msqrt&gt;&lt;mfrac&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;/msqrt&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\displaystyle{c=\sqrt{\frac{\chi^2}{\chi^2+n}}}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:3.04em;vertical-align:-1.137791em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord sqrt&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.902209em;&#34;&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-5em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34; style=&#34;padding-left:1em;&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen nulldelimiter&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mfrac&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.4171079999999998em;&#34;&gt;&lt;span style=&#34;top:-2.314em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.740108em;&#34;&gt;&lt;span style=&#34;top:-2.9890000000000003em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.23em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;frac-line&#34; style=&#34;border-bottom-width:0.04em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.677em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.740108em;&#34;&gt;&lt;span style=&#34;top:-2.9890000000000003em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8804400000000001em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.862209em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;min-width:1.02em;height:3.08em;&#34;&gt;&lt;svg width=&#39;400em&#39; height=&#39;3.08em&#39; viewBox=&#39;0 0 400000 3240&#39; preserveAspectRatio=&#39;xMinYMin slice&#39;&gt;&lt;path d=&#39;M473,2793c339.3,-1799.3,509.3,-2700,510,-2702
+c3.3,-7.3,9.3,-11,18,-11H400000v40H1017.7s-90.5,478,-276.2,1466c-185.7,988,
+-279.5,1483,-281.5,1485c-2,6,-10,9,-24,9c-8,0,-12,-0.7,-12,-2c0,-1.3,-5.3,-32,
+-16,-92c-50.7,-293.3,-119.7,-693.3,-207,-1200c0,-1.3,-5.3,8.7,-16,30c-10.7,
+21.3,-21.3,42.7,-32,64s-16,33,-16,33s-26,-26,-26,-26s76,-153,76,-153s77,-151,
+77,-151c0.7,0.7,35.7,202,105,604c67.3,400.7,102,602.7,104,606z
+M1001 80H400000v40H1017z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.137791em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;当列联表中的两个变量相互独立时,系数&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;c=0&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.43056em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; ,并且永远不可能大于1&lt;/p&gt;
+&lt;h5 id=&#34;v相关系数&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;V&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.22222em;&#34;&gt;V&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;相关系数&lt;/h5&gt;
+&lt;p&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mstyle scriptlevel=&#34;0&#34; displaystyle=&#34;true&#34;&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msqrt&gt;&lt;mfrac&gt;&lt;msup&gt;&lt;mi&gt;χ&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;×&lt;/mo&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;[&lt;/mo&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;R&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo separator=&#34;true&#34;&gt;,&lt;/mo&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;]&lt;/mo&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;/msqrt&gt;&lt;/mstyle&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\displaystyle V=\sqrt{\frac{\chi^2}{n\times min[(R-1),(c-1)]}}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.22222em;&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:3.04em;vertical-align:-1.165571em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord sqrt&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.8744290000000001em;&#34;&gt;&lt;span class=&#34;svg-align&#34; style=&#34;top:-5em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34; style=&#34;padding-left:1em;&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mopen nulldelimiter&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mfrac&#34;&gt;&lt;span class=&#34;vlist-t vlist-t2&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.4171079999999998em;&#34;&gt;&lt;span style=&#34;top:-2.314em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;×&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.00773em;&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mpunct&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.16666666666666666em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.23em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;frac-line&#34; style=&#34;border-bottom-width:0.04em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.677em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:3em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;χ&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.740108em;&#34;&gt;&lt;span style=&#34;top:-2.9890000000000003em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.936em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mclose nulldelimiter&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;top:-3.834429em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:5em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;hide-tail&#34; style=&#34;min-width:1.02em;height:3.08em;&#34;&gt;&lt;svg width=&#39;400em&#39; height=&#39;3.08em&#39; viewBox=&#39;0 0 400000 3240&#39; preserveAspectRatio=&#39;xMinYMin slice&#39;&gt;&lt;path d=&#39;M473,2793c339.3,-1799.3,509.3,-2700,510,-2702
+c3.3,-7.3,9.3,-11,18,-11H400000v40H1017.7s-90.5,478,-276.2,1466c-185.7,988,
+-279.5,1483,-281.5,1485c-2,6,-10,9,-24,9c-8,0,-12,-0.7,-12,-2c0,-1.3,-5.3,-32,
+-16,-92c-50.7,-293.3,-119.7,-693.3,-207,-1200c0,-1.3,-5.3,8.7,-16,30c-10.7,
+21.3,-21.3,42.7,-32,64s-16,33,-16,33s-26,-26,-26,-26s76,-153,76,-153s77,-151,
+77,-151c0.7,0.7,35.7,202,105,604c67.3,400.7,102,602.7,104,606z
+M1001 80H400000v40H1017z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-s&#34;&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:1.165571em;&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;当两个变量相互独立时,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;V=0&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.22222em;&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;0&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当两个变量完全相关时,&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;V=1&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.22222em;&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.64444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当列联表中有一维为2,则&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;V&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;V&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.22222em;&#34;&gt;V&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;就等于&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;φ&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\varphi&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.625em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;φ&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第10章-方差分析&#34;&gt;第10章 方差分析&lt;/h2&gt;
+&lt;h3 id=&#34;方差分析引论&#34;&gt;方差分析引论&lt;/h3&gt;
+&lt;p&gt;方差分析排除错误累计的概率,能有效避免拒绝真实的原假设&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;术语&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;方差分析定义,ANOVA&lt;br&gt;
+主要分析变量间是否有关系,关系强度&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;因素或因子&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;水平或处理&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;基本思想和原理&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;总误差,SST&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;组内误差,SSE&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;组间误差,SSA&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;误差分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;基本假定&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;总体都服从正态分布&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;各总体方差必须相同&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;单因素方差分析&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;数据结构&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分析步骤&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;提出假设&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;构造检验的统计量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;计算样本均值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算全部观测值均值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算各误差平方和&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算统计量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;MSA&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MSE&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;做出统计决策&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;方差分析表&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关系强度的测量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;R2,SSA与SST的比值来反映&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;方差分析中的多重比较&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最小显著差异方法,LSD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;双因素方差分析&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;无交互作用的双因素方差分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有交互作用的双因素方差分析&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第11章-一元线性回归&#34;&gt;第11章 一元线性回归&lt;/h2&gt;
+&lt;h3 id=&#34;变量间关系的度量&#34;&gt;变量间关系的度量&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;变量间的关系&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;函数关系&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;相关关系&lt;br&gt;
+变量之间存在不确定的数量关系一个 变量取值不能由另一个变量唯一确定​&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;相关关系的描述与度量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;散点图中相关关系的表现形态&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;线性相关&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;正相关&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;负相关&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;非线性相关&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;完全相关&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不完全相关&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;相关系数&lt;br&gt;
+​用来准确度量变量之间的关系强度​&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;总体相关系数，ρ&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;样本相关系数，r&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Pearson相关系数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;r的取值范围，[-1,1]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;r具有对称性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;r大小与自变量和因变量的原点及尺度无关&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不能用于描述非线性关系&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;r虽可以度量自变量与因变量之间的关系，但二者不一定有因果关系&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;│r│→1，说明两变量之间线性关系越强；│r│→0，说明关系越弱&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;│r│≥0.8，两变量之间呈高度相关&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;0.3≤│r│＜0.5，低度相关&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;│r│＜0.3，相关程度较弱，可视为不相关&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;相关系数的显著性检验&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;r的抽样分布&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;r的显著性检验&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常用t检验&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;一元线性回归&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;一元线性回归模型&lt;br&gt;
+回归分析中只涉及一个自变量，称为一元回归，若因变量与自变量存在线性关系，则称为一元线性回归&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;理论回归模型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;因变量y与自变量x存在线性关系&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;假定x非随机&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;误差项ε是期望值为0的随机变量&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;误差项服从正态分布且独立&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回归方程&lt;br&gt;
+由回归模型得到，表示因变量的期望值随自变量变化的方程&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;估计的回归方程&lt;br&gt;
+根据样本统计量数据求出&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;参数的最小二乘估计&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;最小二乘法，也称最小平方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;广泛应用于回归模型参数的估计&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回归直线的拟合优度&lt;br&gt;
+回归直线与观测点的接近程度&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;判定系数 ，R2,变差平方和占总平和的比值&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;变差，变差平方和,SSR&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;残差，残差平方和, SSE&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;总平方和，SST&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;估计标准误差&lt;br&gt;
+反映了因变量y随机波动的大小&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显著性检验&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;回归系数的检验&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;线性关系的检验&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回归分析结果的评价&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;利用回归方程进行预测&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;点估计&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;平均值的点估计&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;个别值的点估计&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;区间估计&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;置信区间估计&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;预测区间估计&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;残差分析&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;残差与残差图&lt;/li&gt;
+&lt;li&gt;标准化残差&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第12章-多元线性回归&#34;&gt;第12章 多元线性回归&lt;/h2&gt;
+&lt;h3 id=&#34;多元线性回归模型&#34;&gt;多元线性回归模型&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;多元回归模型与回归方程&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;多元回归模型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对误差项的三个基本假定，参考一元线性回归方程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多元回归方程&lt;br&gt;
+描述了因变量的期望值与自变量的关系&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;估计的多元回归方程&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;偏回归系数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;平均变动量&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;参数的最小二乘估计&lt;br&gt;
+当残差平方和最小时，可得到偏回归系数&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回归方程的拟合优度&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;多重判定系数,R2&lt;br&gt;
+多元回归中回归平方和占总平方和的比例&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调整的多重判定系数，Ra2&lt;br&gt;
+为避免增加自变量而增大R2，用样本量n和自变量个数k调整R2，在多元回归分析中，常用调整的多重判定系数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多重相关系数&lt;br&gt;
+也称复相关系数，度量了因变量同k个自变量的相关程度​&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;估计标准误差&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显著性检验&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;理解线性关系检验（F检验）与回归系数检验（t检验）在一元回归和多元回归中的区别&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;线性关系检验&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;总体显著性检验并不能说明单个自变量与因变量的关系一定是显著的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;回归系数检验和推断&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多重共线性&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;多重共线性会产生的问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多重共线性的判别&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多重共线性问题的处理&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;利用回归方程进行预测&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;变量选择方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;向前选择&lt;/li&gt;
+&lt;li&gt;向后剔除&lt;/li&gt;
+&lt;li&gt;逐步回归&lt;/li&gt;
+&lt;li&gt;最优子集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;第13章-时间序列分析和预测&#34;&gt;第13章 时间序列分析和预测&lt;/h2&gt;
+&lt;h3 id=&#34;时间序列极其分解&#34;&gt;时间序列极其分解&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;平稳序列&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;非平稳序列&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;有趋势的序列&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;有趋势和季节性的序列&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;几种成分混合而成的复合序列&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;时间序列的四种成分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;趋势，T&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;季节性或季节变动，S&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;周期性或循环波动，C&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;随机性或不规则波动，I&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;乘法模型：Y=T x S x C x I&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;时间序列的描述性分析&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;图形描述&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;增长率分析&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;增长率&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;环比增长率&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;定基增长率&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;平均增长率&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[公式]{.ul}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;时间序列预测步骤&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;确定时间序列成分&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选择预测方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;预测方法的流程图，&lt;strong&gt;待补全&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;评估预测方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;平均误差&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[公式]{.ul}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;平均绝对误差&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;均方误差&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;平均百分比误差和平均绝对百分比误差&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进行预测&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;平稳序列的预测&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;简单平均法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;移动平均法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;简单移动平均法&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;加权移动平均法&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;指数平滑法&lt;br&gt;
+理解如何选择一个合适的α&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;趋势型序列的预测&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;线性趋势预测&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;非线性趋势预测&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;指数曲线&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多阶曲线&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复合型序列的分解预测&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;季节性多元回归模型&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;季节自回归模型&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;时间序列分解法预测模型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;确定并分离季节成分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;确定季节指数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分离季节成分&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;建立预测模型进行预测&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+">统计学</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/jin-qi-xue-xi-hui-gu/"" data-c="
+          &lt;h2 id=&#34;sql&#34;&gt;SQL&lt;/h2&gt;
+&lt;p&gt;过了一遍&amp;lt;SQL必知必会&amp;gt;,对于SQL中的查询语句编写大致能熟练操作,但在牛客网上刷&amp;quot;数据库&amp;quot;题时,前面18道题一半能做到一次代码通过测试用例,但中期的15道题,基本都无法做到一次通过,而是不断改代码或者时参考题解方能通过测试.基于此,大概总结了几点,接下来可以去弥补:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;存在一定的知识盲区,比如有关datetime函数如何编写和使用,在&amp;lt;必知必会&amp;gt;里是没提到过的&lt;/li&gt;
+&lt;li&gt;知识点的灵活使用度还比较缺乏,我想应该跟自己实际操作熟练度有关,做题太少&lt;/li&gt;
+&lt;li&gt;对于题干的分析不够深入&lt;/li&gt;
+&lt;li&gt;查询语句编写过程中,细节把握不够,比如表名/列名输入错误&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;统计学&#34;&gt;统计学&lt;/h2&gt;
+&lt;p&gt;统计学起初根据网友推荐的可汗学院统计学视频在学习,但中途有点力不从心,老头子讲课过于细致入微,花费大量时间,心里对于这块没有把握,回看了当年2017年购买的大数据分析电子教程,里面谈到了更多关于如何学习数据分析,以及如何把握每个知识块的时间节点,里面有统计学的PPT教程,于是又开始看该PPT,忽视了可汗学院视频课,现在搞得有点两头无法兼顾,内心矛盾重重,又似无头苍蝇般,拖慢了最近的学习进度.其实购买的教程里学习建议也有提到需要花上49天来学习统计学,所以自己没必要急于求成,想要一口气学完,接下来需要制定更加详细的学习计划,争取一个月拿下统计学,中间穿插excel数据统计相关分析的函数学习.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;python三大数据分析模块numpypandasmathplotlib&#34;&gt;Python三大数据分析模块(Numpy/Pandas/Mathplotlib)&lt;/h2&gt;
+&lt;p&gt;三大模块都有了解大致框架,以及如何配合使用,但唯有Numpy目前已全面的学了一编,也能利用python写出基本的数组和运算函数,其他两大模块还未全面学习和练习使用,计划统计学结束学习后再进行该知识点的学习和练习.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;后期学习规划&#34;&gt;后期学习规划&lt;/h2&gt;
+&lt;p&gt;在以上三大模块知识学习掌握一定基础后,开始着手以下的学习:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;统计方法论&lt;/li&gt;
+&lt;li&gt;机器学习&lt;/li&gt;
+&lt;li&gt;数据分析思维的学习&lt;/li&gt;
+&lt;/ol&gt;
+">近期学习回顾</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-7/"" data-c="
+          &lt;p&gt;#用通配符进行过滤&lt;/p&gt;
+&lt;h4 id=&#34;like-操作符&#34;&gt;LIKE 操作符&lt;/h4&gt;
+&lt;h5 id=&#34;通配符wildcard&#34;&gt;通配符（wildcard）&lt;/h5&gt;
+&lt;p&gt;用来匹配值的一部分的特殊字符。&lt;/p&gt;
+&lt;p&gt;为在搜索子句中使用通配符，必须使用LIKE 操作符。LIKE指示DBMS，后跟的搜索模式利用通配符匹配而不是简单的相等匹配进行比较。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;通配符搜索只能用于文本字段（字符串），非文本数据类型字段不能使用通配符搜索。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;百分号通配符&#34;&gt;百分号（%）通配符&lt;/h5&gt;
+&lt;p&gt;最常使用的通配符是百分号（%）。在搜索串中，%表示任何字符出现任意次数.&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE &#39;Fish%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;说明：Access 通配符&lt;br&gt;
+如果使用的是Microsoft Access，需要使用*而不是%。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;通配符可在搜索模式中的任意位置使用，并且可以使用多个通配符.&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE &#39;%bean bag%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通配符也可以出现在搜索模式的中间，虽然这样做不太有用.&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products
+WHERE prod_name LIKE &#39;F%y&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;说明：请注意后面所跟的空格&lt;br&gt;
+包括Access 在内的许多DBMS 都用空格来填补字段的内容。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：请注意NULL&lt;br&gt;
+通配符%看起来像是可以匹配任何东西，但有个例外，这就是NULL。&lt;br&gt;
+子句WHERE prod_name LIKE &#39;%&#39;不会匹配产品名称为NULL 的行。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;#####下划线（_）通配符&lt;/p&gt;
+&lt;p&gt;另一个有用的通配符是下划线（_）。下划线的用途与%一样，但它只匹配&lt;strong&gt;单个字符&lt;/strong&gt;，而不是多个字符。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;DB2 不支持通配符_。&lt;br&gt;
+如果使用的是Microsoft Access，需要使用?而不是_。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对比一下两个例子,观察下划线与百分号通配符区别.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入▼&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE &#39;__ inch teddy bear&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;​                输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_id prod_name
+-------- --------------------
+BR02 12 inch teddy bear
+BR03 18 inch teddy bear
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;输入▼&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_name
+FROM Products
+WHERE prod_name LIKE &#39;% inch teddy bear&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;​                 输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_id prod_name
+-------- --------------------
+BR01 8 inch teddy bear
+BR02 12 inch teddy bear
+BNR3 18 inch teddy bear
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;与%能匹配0 个字符不同，_总是刚好匹配一个字符，不能多也不能少.&lt;/p&gt;
+&lt;h5 id=&#34;方括号-通配符&#34;&gt;方括号（[ ]）通配符&lt;/h5&gt;
+&lt;p&gt;方括号（[]）通配符用来指定一个字符集，它必须匹配指定位置（通配符的位置）的一个字符.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;说明：并不总是支持集合&lt;br&gt;
+与前面描述的通配符不一样，并不是所有DBMS 都支持用来创建集合&lt;br&gt;
+的[]。只有微软的Access 和SQL Server 支持集合。为确定你使用的&lt;br&gt;
+DBMS 是否支持集合，请参阅相应的文档。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;此通配符可以用前缀字符^（脱字号）来否定。&lt;/p&gt;
+&lt;p&gt;如果使用的是Microsoft Access，需要用!而不是^来否定一个集合.&lt;/p&gt;
+&lt;p&gt;NOT 操作符可得出类似的结果。^的唯一优点是在使用多个WHERE 子句时可以简化语法.&lt;/p&gt;
+&lt;h5 id=&#34;使用通配符的技巧&#34;&gt;使用通配符的技巧&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;不要过度使用通配符。如果其他操作符能达到相同的目的，应该使用&lt;br&gt;
+其他操作符。&lt;/li&gt;
+&lt;li&gt;在确实需要使用通配符时，也尽量不要把它们用在搜索模式的开始&lt;br&gt;
+处。把通配符置于开始处，搜索起来是最慢的。&lt;/li&gt;
+&lt;li&gt;仔细注意通配符的位置。如果放错地方，可能不会返回想要的数据。&lt;/li&gt;
+&lt;/ul&gt;
+">《SQL必知必会》学习笔记-2020-6-7</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-6/"" data-c="
+          &lt;h1 id=&#34;排序检索数据&#34;&gt;排序检索数据&lt;/h1&gt;
+&lt;h4 id=&#34;子句clause&#34;&gt;子句（clause）&lt;/h4&gt;
+&lt;p&gt;SQL 语句由子句构成，有些子句是必需的，有些则是可选的。一个子句通常由一个关键字加上所提供的数据组成。&lt;/p&gt;
+&lt;p&gt;为了明确地排序用SELECT 语句检索出的数据，可使用ORDER BY 子句。&lt;br&gt;
+ORDER BY 子句取一个或多个列的名字，据此对输出进行排序&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products
+ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在指定一条ORDER BY 子句时，应该保证它是SELECT 语句中最后一条子句。如果它不是最后的子句，将会出现错误消息。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;按多个列排序&#34;&gt;按多个列排序&lt;/h4&gt;
+&lt;p&gt;要按多个列排序，简单指定列名，列名之间用逗号分开即可（就像选择多个列时那样）。&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_price, prod_name
+FROM Products
+ORDER BY prod_price, prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_id prod_price prod_name
+---
+BNBG02 3.4900 Bird bean bag toy
+BNBG01 3.4900 Fish bean bag toy
+BNBG03 3.4900 Rabbit bean bag toy
+RGAN01 4.9900 Raggedy Ann
+BR01 5.9900 8 inch teddy bear
+BR02 8.9900 12 inch teddy bear
+RYL01 9.4900 King doll
+RYL02 9.4900 Queen doll
+BR03 11.9900 18 inch teddy bear
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;按列位置排序&#34;&gt;按列位置排序&lt;/h4&gt;
+&lt;p&gt;除了能用列名指出排序顺序外，ORDER BY 还支持按相对列位置进行排序。&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_price, prod_name
+FROM Products
+ORDER BY 2, 3;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_id prod_price prod_name
+------- ---------- --------------------
+BNBG02 3.4900 Bird bean bag toy
+BNBG01 3.4900 Fish bean bag toy
+BNBG03 3.4900 Rabbit bean bag toy
+RGAN01 4.9900 Raggedy Ann
+BR01 5.9900 8 inch teddy bear
+BR02 8.9900 12 inch teddy bear
+RYL01 9.4900 King doll
+RYL02 9.4900 Queen doll
+BR03 11.9900 18 inch teddy bear
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这一技术的主要好处在于不用重新输入列名。但它也有缺点。首先，不明&lt;br&gt;
+确给出列名有可能造成错用列名排序。其次，在对SELECT 清单进行更改&lt;br&gt;
+时容易错误地对数据进行排序（忘记对ORDER BY 子句做相应的改动）。&lt;br&gt;
+最后，如果进行排序的列不在SELECT 清单中，显然不能使用这项技术。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;指定排序方向&#34;&gt;指定排序方向&lt;/h4&gt;
+&lt;p&gt;数据排序不限于升序排序（从A 到Z），这只是默认的排序顺序。还可以使用ORDER BY 子句进行降序（从Z 到A）排序。为了进行降序排序，必须指定&lt;strong&gt;DESC&lt;/strong&gt; 关键字。&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_price, prod_name
+FROM Products
+ORDER BY prod_price DESC;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_id prod_price prod_name
+------- ---------- --------------------
+BR03 11.9900 18 inch teddy bear
+RYL01 9.4900 King doll
+RYL02 9.4900 Queen doll
+BR02 8.9900 12 inch teddy bear
+BR01 5.9900 8 inch teddy bear
+RGAN01 4.9900 Raggedy Ann
+BNBG01 3.4900 Fish bean bag toy
+BNBG02 3.4900 Bird bean bag toy
+BNBG03 3.4900 Rabbit bean bag toy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;如果想在多个列上进行降序排序，必须对每一列指定DESC 关键字。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;过滤数据&#34;&gt;过滤数据&lt;/h1&gt;
+&lt;p&gt;如何使用SELECT 语句的WHERE 子句指定搜索条件。&lt;/p&gt;
+&lt;h4 id=&#34;使用where-子句&#34;&gt;使用WHERE 子句&lt;/h4&gt;
+&lt;p&gt;在SELECT 语句中，数据根据WHERE 子句中指定的搜索条件进行过滤。WHERE 子句在表名（FROM 子句）之后给出。&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name, prod_price
+FROM Products
+WHERE prod_price = 3.49;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name prod_price
+------------------- ----------
+Fish bean bag toy 3.49
+Bird bean bag toy 3.49
+Rabbit bean bag toy 3.49
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这条语句从products 表中检索两个列，但不返回所有行，只返回&lt;br&gt;
+prod_price 值为3.49 的行&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;在同时使用ORDER BY 和WHERE 子句时，应该让ORDER BY 位于WHERE 之后，否则将会产生错误&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;where-子句操作符&#34;&gt;WHERE 子句操作符&lt;/h4&gt;
+&lt;p&gt;SQL 支持下表 列出的所有条件操作符。&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Superbishop.github.io/post-images/1591415615769.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;检查单个值&#34;&gt;检查单个值&lt;/h4&gt;
+&lt;p&gt;列出所有价格小于10 美元的产品：&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name, prod_price
+FROM Products
+WHERE prod_price &amp;lt; 10;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name prod_price
+------------------- ----------
+Fish bean bag toy 3.49
+Bird bean bag toy 3.49
+Rabbit bean bag toy 3.49
+8 inch teddy bear 5.99
+12 inch teddy bear 8.99
+Raggedy Ann 4.99
+King doll 9.49
+Queen doll 9.49
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;检索所有价格小于等于10 美元的产品：&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name, prod_price
+FROM Products
+WHERE prod_price &amp;lt;= 10;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;不匹配检查&#34;&gt;不匹配检查&lt;/h4&gt;
+&lt;p&gt;列出所有不是供应商DLL01 制造的产品：&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT vend_id, prod_name
+FROM Products
+WHERE vend_id &amp;lt;&amp;gt; &#39;DLL01&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vend_id prod_name
+---------- ------------------
+BRS01 8 inch teddy bear
+BRS01 12 inch teddy bear
+BRS01 18 inch teddy bear
+FNG01 King doll
+FNG01 Queen doll
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;何时使用引号？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;单引号用来限定字符串。如果将值与字符串类型的列进行比较，就需要限定引号。用来与数值列进行比较的值不用引号。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;范围值检查&#34;&gt;范围值检查&lt;/h4&gt;
+&lt;p&gt;要检查某个范围的值，可以使用BETWEEN 操作符。其语法与其他WHERE子句的操作符稍有不同，因为它需要两个值，即范围的开始值和结束值。&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name, prod_price
+FROM Products
+WHERE prod_price BETWEEN 5 AND 10;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name prod_price
+------------------- ----------
+8 inch teddy bear 5.99
+12 inch teddy bear 8.99
+King doll 9.49
+Queen doll 9.49
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;空值检查&#34;&gt;空值检查&lt;/h4&gt;
+&lt;p&gt;在创建表时，表设计人员可以指定其中的列能否不包含值。在一个列不包含值时，称其包含&lt;strong&gt;空值NULL&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NULL&lt;br&gt;
+无值（no value），它与字段包含0、空字符串或仅仅包含空格不同。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;SELECT 语句有一个特殊的WHERE 子句，可用来检查具有NULL 值的列。这个WHERE 子句就是&lt;strong&gt;IS NULL&lt;/strong&gt; 子句。&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products
+WHERE prod_price IS NULL;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：NULL 和非匹配&lt;br&gt;
+通过过滤选择不包含指定值的所有行时，你可能希望返回含NULL 值&lt;br&gt;
+的行。但是这做不到。因为未知（unknown）有特殊的含义，数据库&lt;br&gt;
+不知道它们是否匹配，所以在进行匹配过滤或非匹配过滤时，不会返&lt;br&gt;
+回这些结果。&lt;br&gt;
+过滤数据时，一定要验证被过滤列中含NULL 的行确实出现在返回的&lt;br&gt;
+数据中。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;高级数据过滤&#34;&gt;高级数据过滤&lt;/h1&gt;
+&lt;p&gt;如何组合WHERE 子句以建立功能更强、更高级的搜索条件？&lt;/p&gt;
+&lt;p&gt;如何使用NOT 和IN 操作符？&lt;/p&gt;
+&lt;h4 id=&#34;组合where-子句&#34;&gt;组合WHERE 子句&lt;/h4&gt;
+&lt;p&gt;为了进行更强的过滤控制，SQL 允许给出多个WHERE 子句。这些子句有两&lt;br&gt;
+种使用方式，即以&lt;strong&gt;AND 子句或OR 子句&lt;/strong&gt;的方式使用。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;操作符（operator）&lt;br&gt;
+用来联结或改变WHERE 子句中的子句的关键字，也称为逻辑操作符&lt;br&gt;
+（logical operator）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;and操作符&#34;&gt;AND操作符&lt;/h4&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_price, prod_name
+FROM Products
+WHERE vend_id = &#39;DLL01&#39; AND prod_price &amp;lt;= 4;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;or操作符&#34;&gt;OR操作符&lt;/h4&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name, prod_price
+FROM Products
+WHERE vend_id = &#39;DLL01&#39; OR vend_id = ‘BRS01’;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;求值顺序&#34;&gt;求值顺序&lt;/h4&gt;
+&lt;p&gt;WHERE 子句可以包含任意数目的AND 和OR 操作符。允许两者结合以进行复杂、高级的过滤。但SQL（像多数语言一样）在处理OR 操作符前，优先处理AND 操作符。&lt;/p&gt;
+&lt;p&gt;若想优先处理OR子句,解决方法是使用&lt;strong&gt;圆括号&lt;/strong&gt;对操作符进行明确分组.&lt;/p&gt;
+&lt;p&gt;对比一下两个例子,可得出,通过使用圆括号,输出结果截然不同.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name, prod_price
+FROM Products
+WHERE vend_id = &#39;DLL01&#39; OR vend_id = &#39;BRS01&#39;
+AND prod_price &amp;gt;= 10;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name prod_price
+------------------- ----------
+Fish bean bag toy 3.4900
+Bird bean bag toy 3.4900
+Rabbit bean bag toy 3.4900
+18 inch teddy bear 11.9900
+Raggedy Ann 4.9900
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name, prod_price
+FROM Products
+WHERE (vend_id = &#39;DLL01&#39; OR vend_id = &#39;BRS01&#39;)
+AND prod_price &amp;gt;= 10;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name prod_price
+------------------- ----------
+18 inch teddy bear 11.9900
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：在WHERE 子句中使用圆括号&lt;br&gt;
+任何时候使用具有AND 和OR 操作符的WHERE 子句，都应该使用圆括&lt;br&gt;
+号明确地分组操作符。不要过分依赖默认求值顺序，即使它确实如你&lt;br&gt;
+希望的那样。使用圆括号没有什么坏处，它能消除歧义。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;​&lt;/p&gt;
+&lt;h4 id=&#34;in-操作符&#34;&gt;IN 操作符&lt;/h4&gt;
+&lt;p&gt;IN 操作符用来指定条件范围，范围中的每个条件都可以进行匹配。IN 取一组由逗号分隔、括在圆括号中的合法值.&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name, prod_price
+FROM Products
+WHERE vend_id IN ( &#39;DLL01&#39;, &#39;BRS01&#39; )
+ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name prod_price
+------------------- ----------
+12 inch teddy bear 8.9900
+18 inch teddy bear 11.9900
+8 inch teddy bear 5.9900
+Bird bean bag toy 3.4900
+Fish bean bag toy 3.4900
+Rabbit bean bag toy 3.4900
+Raggedy Ann 4.9900
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;IN 操作符看似与OR操作符如出同辙,但IN操作符更具优势.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在有很多合法选项时，IN 操作符的语法&lt;strong&gt;更清楚，更直观&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在与其他AND 和OR 操作符组合使用IN 时，&lt;strong&gt;求值顺序更容易管理&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;IN 操作符一般比一组OR 操作符执行得更快&lt;/strong&gt;（在上面这个合法选项很少的例子中，你看不出性能差异）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;IN 的最大优点是可以包含其他SELECT 语句，能够更动态地建立WHERE 子句&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;not-操作符&#34;&gt;NOT 操作符&lt;/h4&gt;
+&lt;p&gt;WHERE 子句中用来否定其后条件的关键字.&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products
+WHERE NOT vend_id = &#39;DLL01&#39;
+ORDER BY prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name
+------------------
+12 inch teddy bear
+18 inch teddy bear
+8 inch teddy bear
+King doll
+Queen doll
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;为什么使用NOT？&lt;/p&gt;
+&lt;p&gt;对于这里的这种简单的WHERE 子句，使用NOT 确实没有什么优势。但在更复杂的子句中，NOT 是非常有用的。例如，在与IN 操作符联合使用时，NOT 可以非常简单地找出与条件列表不匹配的行。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;说明：MariaDB 中的NOT&lt;br&gt;
+MariaDB 支持使用NOT 否定IN、BETWEEN 和EXISTS 子句。大多数&lt;br&gt;
+DBMS 允许使用NOT 否定任何条件。&lt;/p&gt;
+&lt;/blockquote&gt;
+">《SQL必知必会》学习笔记-2020-6-6</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-5/"" data-c="
+          &lt;h3 id=&#34;select-语句&#34;&gt;SELECT 语句&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;用途是从一个或多个表中检索信息。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;关键字keyword&#34;&gt;关键字（keyword）&lt;/h4&gt;
+&lt;p&gt;作为SQL 组成部分的保留字。关键字不能用作表或列的名字。&lt;/p&gt;
+&lt;p&gt;为了使用SELECT 检索表数据，必须至少给出两条信息——想选择什么，&lt;br&gt;
+以及从什么地方选择。&lt;/p&gt;
+&lt;p&gt;SQL 是一种语言而不是一个应用程序。&lt;/p&gt;
+&lt;p&gt;具体如何写SQL 语句并显示语句输出，是随不同的应用程序而变化的&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;检索单个列&#34;&gt;检索单个列&lt;/h4&gt;
+&lt;p&gt;利用SELECT 语句从Products 表中检索一个名为prod_name的列。&lt;/p&gt;
+&lt;p&gt;输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name
+-------------------
+Fish bean bag toy
+Bird bean bag toy
+Rabbit bean bag toy
+8 inch teddy bear
+12 inch teddy bear
+18 inch teddy bear
+Raggedy Ann
+King doll
+Queen doll
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;sql书写规范&#34;&gt;SQL书写规范&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;多条SQL 语句必须以分号（；）分隔。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SQL 语句不区分大小写，因此SELECT 与select 是相同的。同样，写成Select 也没有关系。许多SQL 开发人员喜欢对&lt;strong&gt;SQL 关键字使用大写&lt;/strong&gt;，而&lt;strong&gt;对列名和表名使用小写&lt;/strong&gt;，这样做使代码更&lt;em&gt;易于阅读和调试&lt;/em&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在处理SQL 语句时，其中所有空格都被忽略。以下三种写法等效的，但第一、三种写法符合多数SQL 开发人员习惯，便于阅读和调试。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products;
+
+SELECT prod_name FROM Products;
+
+SELECT
+prod_name
+FROM
+Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;检索多个列&#34;&gt;检索多个列&lt;/h4&gt;
+&lt;p&gt;在SELECT 关键字后给出多个列名，列名之间必须以逗号分隔。&lt;/p&gt;
+&lt;p&gt;输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_id, prod_name, prod_price
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_id prod_name prod_price
+--------- -------------------- ----------
+BNBG01 Fish bean bag toy 3.4900
+BNBG02 Bird bean bag toy 3.4900
+BNBG03 Rabbit bean bag toy 3.4900
+BR01 8 inch teddy bear 5.9900
+BR02 12 inch teddy bear 8.9900
+BR03 18 inch teddy bear 11.9900
+RGAN01 Raggedy Ann 4.9900
+RYL01 King doll 9.4900
+RYL02 Queen dool 9.4900
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SQL 语句一般返回原始的、无格式的数据。数据的格式化是表示问题，而不是检索问题。因此，表示（如把上面的价格值显示为正确的十进制数值货币金额）一般在显示该数据的应用程序中规定。通常很少直接使用实际检索出的数据（没有应用程序提供的格式）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;检索所有列&#34;&gt;检索所有列&lt;/h4&gt;
+&lt;p&gt;除了指定所需的列外（如上所述，一个或多个列），SELECT 语句还可以&lt;br&gt;
+检索所有的列而不必逐个列出它们。在实际列名的位置使用星号（*）通&lt;br&gt;
+配符可以做到这点，如下所示。&lt;br&gt;
+输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT *
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;缺点：检索不需要的列通常会降低检索和应用程序的性能&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;优点：由于不明确指定列名（因为星号检索每一列），所以能检索出名字未知的列&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;检索不同的值&#34;&gt;检索不同的值&lt;/h4&gt;
+&lt;p&gt;检索products 表中所有产品供应商的ID：&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT vend_id
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vend_id
+------
+BRS01
+BRS01
+BRS01
+DLL01
+DLL01
+DLL01
+DLL01
+FNG01
+FNG01
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SELECT 语句返回9 行（即使表中只有3 个产品供应商），因为products表中有9 种产品。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;检索出不同的值&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT DISTINCT vend_id
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;vend_id
+------
+BRS01
+DLL01
+FNG01
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;如果使用DISTINCT 关键字，它必须直接放在列名的前面。&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;限制结果&#34;&gt;限制结果&lt;/h4&gt;
+&lt;p&gt;SELECT 语句返回指定表中所有匹配的行，很可能是每一行。如果你只想&lt;br&gt;
+返回第一行或者一定数量的行，该怎么办呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在SQL Server 和Access 中使用SELECT 时，可以使用TOP 关键字来限制最多返回多少行，如下所示：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT TOP 5 prod_name
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;输出▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;prod_name
+8 inch teddy bear
+12 inch teddy bear
+18 inch teddy bear
+Fish bean bag toy
+Bird bean bag toy
+&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;使用SELECT TOP 5 语句，只检索前5 行数据&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果你使用的是DB2，很可能习惯使用下面这一DBMS 特定的SQL 语句，像这样：&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products
+FETCH FIRST 5 ROWS ONLY;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FETCH FIRST 5 ROWS ONLY，程序会按字面意思检索前5行&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果你使用Oracle，需要基于ROWNUM（行计数器）来计算行，像这样：&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products
+WHERE ROWNUM &amp;lt;=5;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;WHERE ROWNUM &amp;lt;=5，基于ROWNUM计算&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果你使用MySQL、MariaDB、PostgreSQL 或者SQLite，需要使用LIMIT子句，像这样：&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products
+LIMIT 5;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;LIMIT 5 指示MySQL等DBMS 返回不超过5 行的数据&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;为了得到后面的5 行数据，需要指定从哪儿开始以及检索的行数，像这样：&lt;/p&gt;
+&lt;p&gt;输入▼&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name
+FROM Products
+LIMIT 5 OFFSET 5;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;LIMIT 5 OFFSET 5 指示MySQL 等DBMS 返回从第5 行起的5 行数据。第一个数字是指从哪儿开始，第二个数字是检索的行数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注意事项&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第一个被检索的行是第0 行，而不是第1 行。因此，LIMIT 1 OFFSET1 会检索第2 行，而不是第1 行。&lt;/li&gt;
+&lt;li&gt;MySQL和MariaDB支持&lt;em&gt;简化版的LIMIT 4 OFFSET 3语句&lt;/em&gt;，即&lt;em&gt;LIMIT 3,4&lt;/em&gt;。使用这个语法，&lt;strong&gt;逗号之前的值对应OFFSET&lt;/strong&gt;，&lt;strong&gt;逗号之后的值对应LIMIT&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;并非所有的SQL 实现都一样，SQL 虽然通常都有相当一致的实现，但你不能想当然地认为它总是这样。非常基本的语句往往是容易移植的，但较复杂的语句就不同了。当你针对某个问题寻找SQL解决方案时，一定要记住这一点。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;limit-与-limit-offset使用区别&#34;&gt;LIMIT 与 LIMIT OFFSET使用区别:&lt;/h4&gt;
+&lt;p&gt;LIMIT x,y =LIMIT y OFFSET x :&lt;/p&gt;
+&lt;p&gt;表示从y+1行开始取x行数据;&lt;/p&gt;
+&lt;p&gt;LIMIT x OFFSET y = LIMIT y,x :&lt;/p&gt;
+&lt;p&gt;表示从x+1行开始取y行数据;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;使用注释&#34;&gt;使用注释&lt;/h4&gt;
+&lt;p&gt;为什么需要添加注释？&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;随着SQL语句边长，复杂性增加，有必要添加注释进行说明，便于自己日后调试，也便于他人参考。&lt;/li&gt;
+&lt;li&gt;适用于SQL开始处的内容，比如包含程序员的联系方式、程序描述及说明。&lt;/li&gt;
+&lt;li&gt;另一个重要应用是可以暂时停止不用执行的SQL代码。如果你碰到一个长SQL 语句，而只想测试它的一部分，那么应该注释掉一些代码。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;几种常见注释方法&lt;/p&gt;
+&lt;p&gt;行内注释：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;SELECT prod_name -- 这是一条注释
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;#这是一条注释
+SELECT prod_name
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;/* SELECT prod_name, vend_id
+FROM Products; */
+SELECT prod_name
+FROM Products;
+&lt;/code&gt;&lt;/pre&gt;
+">《SQL必知必会》学习笔记-2020-6-5</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/lesslesssql-bi-zhi-bi-hui-greatergreater-xue-xi-bi-ji-2020-6-4/"" data-c="
+          &lt;h2 id=&#34;数据库database&#34;&gt;数据库(DATABASE)&lt;/h2&gt;
+&lt;h4 id=&#34;定义&#34;&gt;定义&lt;/h4&gt;
+&lt;p&gt;保存有组织的数据的容器（通常是一个文件或一组文件）。&lt;/p&gt;
+&lt;p&gt;最简单的办法是将数据库想象为一个文件柜。这个文件柜是一个存放数据的物理位置，不管数据是什么，也不管数据是如何组织的。&lt;/p&gt;
+&lt;h4 id=&#34;与数据库软件的区别&#34;&gt;与数据库软件的区别&lt;/h4&gt;
+&lt;p&gt;人们通常用数据库这个术语来代表他们使用的数据库软件，这是不正确的，也因此产生了许多混淆。确切地说，数据库软件应称为数据库管理系统（DBMS）。数据库是通过DBMS 创建和操纵的容器，而具体它究竟是什么，形式如何，各种数据库都不一样。&lt;/p&gt;
+&lt;h2 id=&#34;表table&#34;&gt;表（table）&lt;/h2&gt;
+&lt;h4 id=&#34;定义-2&#34;&gt;定义&lt;/h4&gt;
+&lt;p&gt;某种特定类型数据的结构化清单。&lt;/p&gt;
+&lt;p&gt;存储在表中的数据是同一种类型的数据或清单。决不应该将顾客的清单与订单的清单存储在同一个数据库表中，否则以后的检索和访问会很困难。&lt;/p&gt;
+&lt;p&gt;数据库中的每个表都有一个名字来标识自己。这个名字是唯一的，即数&lt;br&gt;
+据库中没有其他表具有相同的名字。&lt;/p&gt;
+&lt;h4 id=&#34;表名&#34;&gt;表名&lt;/h4&gt;
+&lt;p&gt;使表名成为唯一的，实际上是数据库名和表名等的组合。虽然在相同数据库中不能两次使用相同的表名，但在不同的数据库中完全可以使用相同的表名。&lt;/p&gt;
+&lt;h4 id=&#34;模式schema&#34;&gt;模式（schema）&lt;/h4&gt;
+&lt;p&gt;关于数据库和表的布局及特性的信息。&lt;/p&gt;
+&lt;p&gt;模式可以用来描述数据库中特定的表，也可以用来描述整个数据库（和其中表的关系）。&lt;/p&gt;
+&lt;h2 id=&#34;列和数据类型&#34;&gt;列和数据类型&lt;/h2&gt;
+&lt;h4 id=&#34;列column&#34;&gt;列（column）&lt;/h4&gt;
+&lt;p&gt;表中的一个字段。所有表都是由一个或多个列组成的。&lt;/p&gt;
+&lt;h4 id=&#34;分解数据&#34;&gt;分解数据&lt;/h4&gt;
+&lt;p&gt;正确地将数据分解为多个列极为重要。例如，城市、州、邮政编码&lt;br&gt;
+应该总是彼此独立的列。通过分解这些数据，才有可能利用特定的&lt;br&gt;
+列对数据进行分类和过滤（如找出特定州或特定城市的所有顾客）。&lt;/p&gt;
+&lt;h4 id=&#34;数据类型&#34;&gt;数据类型&lt;/h4&gt;
+&lt;p&gt;所允许的数据的类型。每个表列都有相应的数据类型，它限制（或允&lt;br&gt;
+许）该列中存储的数据。&lt;/p&gt;
+&lt;h4 id=&#34;注意数据类型兼容&#34;&gt;注意：数据类型兼容&lt;/h4&gt;
+&lt;p&gt;数据类型及其名称是SQL 不兼容的一个主要原因。虽然大多数基本数&lt;br&gt;
+据类型得到了一致的支持，但许多高级的数据类型却没有。更糟的是，&lt;br&gt;
+偶然会有相同的数据类型在不同的DBMS 中具有不同的名称。对此用&lt;br&gt;
+户毫无办法，重要的是在创建表结构时要记住这些差异。&lt;/p&gt;
+&lt;h2 id=&#34;行row&#34;&gt;行（row）&lt;/h2&gt;
+&lt;h4 id=&#34;定义-3&#34;&gt;定义&lt;/h4&gt;
+&lt;p&gt;表中的一个记录。&lt;/p&gt;
+&lt;h4 id=&#34;说明是记录还是行&#34;&gt;说明：是记录还是行？&lt;/h4&gt;
+&lt;p&gt;你可能听到用户在提到行时称其为数据库记录（record）。这两个术语&lt;br&gt;
+多半是可以交替使用的，但从技术上说，行才是正确的术语。&lt;/p&gt;
+&lt;h2 id=&#34;主键primary-key&#34;&gt;主键（primary key）&lt;/h2&gt;
+&lt;h4 id=&#34;定义-4&#34;&gt;定义&lt;/h4&gt;
+&lt;p&gt;一列（或一组列），其值能够唯一标识表中每一行。&lt;/p&gt;
+&lt;p&gt;表中每一行都应该有一列（或几列）可以唯一标识自己。顾客表可以使&lt;br&gt;
+用顾客编号，而订单表可以使用订单ID。雇员表可以使用雇员ID 或雇&lt;br&gt;
+员社会安全号。&lt;/p&gt;
+&lt;p&gt;主键用来表示一个特定的行。没有主键，更新或删除表中特定行就极为困难。&lt;/p&gt;
+&lt;h4 id=&#34;提示应该总是定义主键&#34;&gt;提示：应该总是定义主键&lt;/h4&gt;
+&lt;p&gt;虽然并不总是需要主键，但多数数据库设计者都会保证他们创建的每&lt;br&gt;
+个表具有一个主键，以便于以后的数据操作和管理。&lt;/p&gt;
+&lt;h4 id=&#34;表中的任何列都可以作为主键只要它满足以下条件&#34;&gt;表中的任何列都可以作为主键，只要它满足以下条件：&lt;/h4&gt;
+&lt;p&gt; 任意两行都不具有相同的主键值；&lt;br&gt;
+ 每一行都必须具有一个主键值（主键列不允许NULL 值）；&lt;br&gt;
+ 主键列中的值不允许修改或更新；&lt;br&gt;
+ 主键值不能重用（如果某行从表中删除，它的主键不能赋给以后的新行）&lt;/p&gt;
+&lt;p&gt;主键通常定义在表的一列上，但并不是必需这么做，也可以一起使用多&lt;br&gt;
+个列作为主键。在使用多列作为主键时，上述条件必须应用到所有列，&lt;br&gt;
+所有列值的组合必须是唯一的（但单个列的值可以不唯一）。&lt;/p&gt;
+&lt;h2 id=&#34;什么是sql&#34;&gt;什么是SQL&lt;/h2&gt;
+&lt;p&gt;SQL（发音为字母S-Q-L 或sequel）是Structured Query Language（结构&lt;br&gt;
+化查询语言）的缩写。SQL 是一种专门用来与数据库沟通的语言。&lt;/p&gt;
+">《SQL必知必会》学习笔记-2020-6-4</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/Ekr4wfa8m/"" data-c="
+          &lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Superbishop.github.io/post-images/1578894191025.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;pre&gt;&lt;code&gt;import requests
+import re
+import xlsxwriter
+
+headers={&amp;quot;User-Agent&amp;quot;: &amp;quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
+        AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36&amp;quot;}
+
+url=&amp;quot;https://movie.douban.com/j/chart/top_list?type=11&amp;amp;interval_id=100%3A90&amp;amp;action=&amp;amp;start=40&amp;amp;limit=20&amp;quot;
+
+response=requests.get(url,headers=headers).text
+
+pat1=r&#39;&amp;quot;rating&amp;quot;:\[&amp;quot;(.*?)&amp;quot;,&amp;quot;\d+&amp;quot;\]&#39;
+pat2=r&#39;&amp;quot;rank&amp;quot;:(\d+)&#39;
+pat3=r&#39;&amp;quot;title&amp;quot;:&amp;quot;(.*?)&amp;quot;&#39;
+
+pattern1=re.compile(pat1)
+pattern2=re.compile(pat2)
+pattern3=re.compile(pat3)
+
+data1=re.findall(pattern1,response)
+data2=re.findall(pattern2,response)
+data3=re.findall(pattern3,response)
+
+#创建表单于电脑桌面保存爬取电影排名结果
+workbook=xlsxwriter.Workbook(&#39;C:doubanfilm3.xlsx&#39;)
+worksheet=workbook.add_worksheet()
+worksheet.write(&amp;quot;A1&amp;quot;,&amp;quot;电影排名&amp;quot;)
+worksheet.write(&amp;quot;B1&amp;quot;,&amp;quot;电影评分&amp;quot;)
+worksheet.write(&amp;quot;C1&amp;quot;,&amp;quot;电影名&amp;quot;)
+
+for x in range(0,len(data1)) :
+    print(&amp;quot;电影排名:&amp;quot;,data2[x],&amp;quot;电影评分:&amp;quot;,data1[x],&amp;quot;电影名:&amp;quot;,data3[x])
+
+    worksheet.write(&amp;quot;A&amp;quot;+str(x+2),data2[x])
+    worksheet.write(&amp;quot;B&amp;quot;+str(x+2),data1[x])
+    worksheet.write(&amp;quot;C&amp;quot;+str(x+2),data3[x])
+
+
+workbook.close()
+
+&lt;/code&gt;&lt;/pre&gt;
+">爬取豆瓣电影列表</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/qlZcHAhor/"" data-c="
+          &lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;概念:针对字符串进行数据筛选的表达式(匹配), eg:  import re&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;原子:正则表达式中实现匹配的基本单位&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;以普通字符作为原子&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;匹配通用字符&lt;br&gt;
+\w 任意字母/数字/下划线&lt;br&gt;
+\W 和小写w相反&lt;br&gt;
+\d 十进制数字&lt;br&gt;
+\D 除了十进制数以外的值&lt;br&gt;
+\s 空白字符&lt;br&gt;
+\S 非空白字符&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;匹配数字/英文/中文&lt;br&gt;
+数字 [0,9]&lt;br&gt;
+英文 [a,z][A,Z]&lt;br&gt;
+中文[\u4e00-\u9fa5]&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原子表:定义一组平等的原子, eg:  pat=&amp;quot;1[3578]\d\d\d\d\d\d\d\d\d&amp;quot;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;元字符:正则表达式中具有特殊意义的字符&lt;/strong&gt;&lt;br&gt;
+.     匹配任意字符(\n 除外)&lt;br&gt;
+^   匹配字符串开始位置 eg: ^136&lt;br&gt;
+$    匹配字符串中结束的位置 eg:666$&lt;br&gt;
+&amp;quot;*&amp;quot;    重复0/1/多次前面原子   eg: \d&lt;br&gt;
+?      重复0/1次前面的原子   eg:\d?&lt;br&gt;
+&amp;quot;+&amp;quot;  重复1/多次前面的原子 eg:\d+&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;匹配固定次数&lt;br&gt;
+{n} 前面的原子出现n次&lt;br&gt;
+{n,} 前面的原子出现至少出现n次&lt;br&gt;
+{n,m} 出现次数介于n-m之间&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;多个正则表达式可用或&amp;quot;|&amp;quot;符号连接,从而实现多种数据匹配&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">正则表达式</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/l99V4EeeY/"" data-c="
+          &lt;pre&gt;&lt;code&gt;import urllib
+from urllib import request
+# https://www.baidu.com/s?wd=%E5%85%8D%E8%B4%B9%E4%BB%A3%E7%90%86IP # url 编码
+url = &amp;quot;http://www.baidu.com/s?&amp;quot;
+wd = {&amp;quot;wd&amp;quot;:&amp;quot;免费代理IP&amp;quot;}
+
+# 构造url编码
+wdd = urllib.parse.urlencode(wd)
+
+url = url + wdd
+req = request.Request(url)
+response = request.urlopen(req)
+print(response.read().decode())
+&lt;/code&gt;&lt;/pre&gt;
+">处理get请求</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/o3jSS0M9C/"" data-c="
+          &lt;pre&gt;&lt;code&gt;proxylist = [
+    {&amp;quot;http&amp;quot;:&amp;quot;47.107.186.18:8118&amp;quot;},
+    {&amp;quot;http&amp;quot;:&amp;quot;101.132.164.113:8118&amp;quot;},
+    {&amp;quot;http&amp;quot;:&amp;quot;121.232.194.196:9000&amp;quot;},
+    {&amp;quot;http&amp;quot;:&amp;quot;112.111.97.101:9000&amp;quot;},
+    {&amp;quot;http&amp;quot;:&amp;quot;175.44.151.198:9000&amp;quot;}
+]
+
+# 随机选取代理IP
+proxy = random.choice(proxylist)
+print(proxy)
+
+# 构建代理处理器对象
+proxyHandler = request.ProxyHandler(proxy)
+
+# 创建自定义opener
+opener = request.build_opener(proxyHandler)
+
+# 创建自定义请求对象
+request = request.Request(url)
+
+response = opener.open(request)
+&lt;/code&gt;&lt;/pre&gt;
+">反爬虫机制2:代理IP爬去网站</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/TbXZS3u2p/"" data-c="
+          &lt;h4 id=&#34;通常我们默认使用的urlopen它是一个特殊的opener也就是模块自动构建好的但基本的urlopen不支持代理ipcookie等其他httphttps高级功能因此需要自动以opener&#34;&gt;通常我们默认使用的urlopen,它是一个特殊的opener,也就是模块自动构建好的,但基本的urlopen()不支持代理IP/cookie等其他HTTP/HTTPS高级功能,因此需要自动以opener.&lt;/h4&gt;
+&lt;h5 id=&#34;通过-reqeustbuildopener创建自定义opener对象使用自定义的opener对象调用open方法发送请求&#34;&gt;* 通过 reqeust.build.opener()创建自定义opener对象,使用自定义的opener对象,调用open()方法发送请求&lt;/h5&gt;
+&lt;h5 id=&#34;若程序全局都使用自定义opener通过requestinstallopener将自定义的opener对象定义为全局opener即若之后凡是调用urlopen都将使用该opener&#34;&gt;* 若程序全局都使用自定义opener,通过request.install.opener()将自定义的opener对象定义为全局opener,即若之后凡是调用urlopen,都将使用该opener&lt;/h5&gt;
+">自定义opener 以及全局opener的创建方法</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/yzZXoI4C0/"" data-c="
+          &lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;反爬虫机制一判断用户是否是浏览器访问而非通过爬虫程序的urllib进行访问&#34;&gt;反爬虫机制一:判断用户是否是浏览器访问,而非通过爬虫程序的urllib进行访问&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;应对方法伪装浏览器进行访问&#34;&gt;应对方法:伪装浏览器进行访问&lt;/h4&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;header={
+&amp;quot;User-Agent&amp;quot;: &amp;quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36&amp;quot;
+} #构造请求头信息,包含进user-agent信息
+
+req=request.Request(url,headers=header)#自定义请求对象将构造的请求头封装进去
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;同时很多时候会添加多个user-agent进行随机爬虫防止被网页识别并拦截&#34;&gt;&lt;strong&gt;同时,很多时候会添加多个user-agent进行随机爬虫,防止被网页识别并拦截&lt;/strong&gt;&lt;/h4&gt;
+">反爬虫机制一</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/zxPVKJyYZ/"" data-c="
+          &lt;h4 id=&#34;正常情况下引入request模块request会自动创建请求对象&#34;&gt;正常情况下,引入request模块,request会自动创建请求对象.&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;response=reqeust.urlopen(url).read().decode() #发送请求,获取响应并解码
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;但往往爬虫时需要创建自定义请求对象使我们能封装更多信息进行请求&#34;&gt;但往往爬虫时需要创建自定义请求对象,使我们能封装更多信息进行请求.&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;req=request.Request(url) #创建自定义请求对象
+response=reqeust.urlopen(req).read().decode() #发送请求,获取响应并解码
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;#####前后两种request,不同点在于,第一种只针对url自动创建了请求对象,而第二种自定义的Request可以封装更多信息,不仅仅是url,还可以是cookies等其他信息,对抗反爬虫机制.&lt;/p&gt;
+">自定义请求</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/UxeS8jyWy/"" data-c="
+          &lt;h3 id=&#34;一-爬虫几个重要基本概念&#34;&gt;一. 爬虫几个重要基本概念&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;爬虫自动获取网站数据的程序&#34;&gt;爬虫:自动获取网站数据的程序&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;反爬虫使用技术手段防止爬虫程序爬取数据&#34;&gt;反爬虫：使用技术手段防止爬虫程序爬取数据&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;误伤反爬虫技术将普通用户识别为爬虫这种情况多出现在封ip中例如学校网络-小区网络再或者网络网络都是共享一个公共ip这个时候如果是封ip就会导致很多正常访问的用户也无法获取到数据-所以相对来说封ip的策略不是特别好通常都是禁止某ip一段时间访问&#34;&gt;误伤：反爬虫技术将普通用户识别为爬虫，这种情况多出现在封ip中，例如学校网络、小区网络再或者网络网络都是共享一个公共ip，这个时候如果是封ip就会导致很多正常访问的用户也无法获取到数据。所以相对来说封ip的策略不是特别好，通常都是禁止某ip一段时间访问。&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;成本反爬虫也是需要人力和机器成本&#34;&gt;成本：反爬虫也是需要人力和机器成本&lt;/h4&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;拦截成功拦截爬虫一般拦截率越高误伤率也就越高&#34;&gt;拦截：成功拦截爬虫，一般拦截率越高，误伤率也就越高&lt;/h4&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-爬虫与反爬虫对抗举例&#34;&gt;二. 爬虫与反爬虫对抗举例:&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://Superbishop.github.io/post-images/1563060420392.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;三-python应对反爬虫机制策略总结&#34;&gt;三. Python应对反爬虫机制策略总结:&lt;/h3&gt;
+&lt;h4 id=&#34;1-反爬虫机制user-agent解析&#34;&gt;1. 反爬虫机制:user-agent解析&lt;/h4&gt;
+&lt;h4 id=&#34;应对机制fake-user-agent通过设定request-headers中的user-agent进行突破&#34;&gt;应对机制:fake user-agent,通过设定Request Headers中的User-Agent进行突破&lt;/h4&gt;
+&lt;h4 id=&#34;2反爬虫机制访问频率限制&#34;&gt;2.反爬虫机制:访问频率限制&lt;/h4&gt;
+&lt;h4 id=&#34;应对机制&#34;&gt;应对机制:&lt;/h4&gt;
+&lt;h4 id=&#34;修改访问频率限制通过-post-方式修改-read_time正常访问的话这个值一般会大于10如果我们修改成-60&#34;&gt;* 	修改访问频率限制,通过 POST 方式，修改 read_time，正常访问的话，这个值一般会大于10如果我们修改成 60.&lt;/h4&gt;
+&lt;h4 id=&#34;代理pi访问通过多个代理ip访问降低单个ip访问频率突破该机制&#34;&gt;* 	代理PI访问,通过多个代理IP访问降低单个IP访问频率突破该机制&lt;/h4&gt;
+&lt;h4 id=&#34;分布式爬虫通过部署在多个服务器上的爬虫程序统一从一个地方拿网址平均下来每个服务器访问频率降低-从而突破限制同时实现的爬虫会更加的稳定和高效&#34;&gt;* 	分布式爬虫,通过部署在多个服务器上的爬虫程序统一从一个地方拿网址,,平均下来每个服务器访问频率降低 ,从而突破限制,同时实现的爬虫会更加的稳定和高效&lt;/h4&gt;
+&lt;h4 id=&#34;3-反爬虫机制蜜罐技术&#34;&gt;3. 反爬虫机制:蜜罐技术&lt;/h4&gt;
+&lt;h5 id=&#34;在反爬虫的机制中有一种蜜罐技术-网页上会故意留下一些人类看不到或者绝对不会点击的链接-由于爬虫会从源代码中获取内容所以爬虫可能会访问这样的链接-这个时候只要网站发现了有ip访问这个链接立刻永久封禁该ip-user-agent-mac地址等等可以用于识别访问者身份的所有信息&#34;&gt;&lt;code&gt;在反爬虫的机制中，有一种蜜罐技术。网页上会故意留下一些人类看不到或者绝对不会点击的链接。由于爬虫会从源代码中获取内容，所以爬虫可能会访问这样的链接。这个时候，只要网站发现了有IP访问这个链接，立刻永久封禁该IP + User-Agent + Mac地址等等可以用于识别访问者身份的所有信息。&lt;/code&gt;&lt;/h5&gt;
+&lt;h4 id=&#34;应对机制定向爬虫技术&#34;&gt;应对机制:定向爬虫技术&lt;/h4&gt;
+">爬虫与反爬虫对抗策略</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/3vAt6NvMi/"" data-c="
+          &lt;ol&gt;
+&lt;li&gt;argv 和input()的不同点:&lt;br&gt;
+用户输入时机的不同.如果参数是在用户执行命令时就要输入,使用argv;若是在脚本运行过程中需要用户输入,则使用input().&lt;br&gt;
+2.与文件相关的命令(方法/函数):&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;close:关闭文件&lt;/li&gt;
+&lt;li&gt;read:读取文件的内容.你可以把结果赋给一个变量.&lt;/li&gt;
+&lt;li&gt;readline:只读取文本文件中的一行&lt;/li&gt;
+&lt;li&gt;truncate:清空文件,慎用&lt;/li&gt;
+&lt;li&gt;write(&#39;stuff&#39;):将struff写入文件&lt;/li&gt;
+&lt;li&gt;seek(0):将读写位置移到文件开头&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Q:如何在文件用一次write命令写入多个字符串且用转义字符进行排版?&lt;/p&gt;
+">Leaning Summary 7-05</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/learning-summary-6-14-2019/"" data-c="
+          &lt;ul&gt;
+&lt;li&gt;use &amp;quot;\n&amp;quot; to let code to print in next line.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;when using three double-quotes, we can edite codes as much as we can and print out to show as what we edit in the quotes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;there are two ways to  format string variable:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;f&amp;quot;some stuff {somevar}&amp;quot;,but we need to define somevar=xxx before.&lt;/li&gt;
+&lt;li&gt;&amp;quot;some stuff {}&amp;quot;.format(text what you like)&lt;/li&gt;
+&lt;/ol&gt;
+">Learning Summary-6-14-2019</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://Superbishop.github.io/post/about/"" data-c="
+          &lt;pre&gt;&lt;code&gt;                         Fresh bird still in Pyhton learning
+&lt;/code&gt;&lt;/pre&gt;
+">About me</a>
+      </div>
+      
+    </div>
+    <div class="page">
+      <div id="page_ul"></div>
+    </div>
+  </div>
+</div>
+<script>
+  !function () {
+    let searchMask = document.querySelector('#search_mask');
+    let result = document.querySelector('#result');
+    let items = document.querySelectorAll('.item');
+    let searchBox = document.querySelector('#search');
+    let statCount = document.querySelector('#stat_count');
+    let statTimes = document.querySelector('#stat_times');
+    let pageUl = document.querySelector('#page_ul');
+    let close = document.querySelector('#close');
+    
+    close.addEventListener('click', function() {
+      searchMask.style = 'display: none;'
+    })
+
+    let finds = [];
+    let contents = [];
+    let pageSize = 10;
+    items.forEach(item => {
+      let a = item.querySelector('a');
+      contents.push({
+        title: a.innerText,
+        details: a.dataset.c,
+        link: a.href
+      })
+      item.remove();
+    })
+
+    function insertStr(soure, start, count) {
+      let newStr = soure.substr(start, count);
+      return soure.slice(0, start) + '<em>' + newStr + '</em>' + soure.slice(start + count);
+    }
+
+    pageUl.addEventListener('click', function(event) {
+      let target = event.target;
+      if (target.__proto__ === HTMLSpanElement.prototype) {
+        appendResults(parseInt(target.dataset.i));
+      }
+    })
+
+    function appendResults(index) {
+      let htmlResult = '';
+      let start = index || 0;
+      let end = Math.min(start + pageSize, finds.length);
+      for (let i = start; i < end; i++) {
+        const current = finds[i];
+        let html = current.title;
+        let sum = 0;
+        let positions = current.positions;
+        positions.forEach(position => {
+          html = insertStr(html, position.start + sum, position.count);
+          sum += 9;
+        })
+        htmlResult += `<div class="item"><a class="result-title" href="${current.link}">${html}</a></div>`;
+      }
+      result.innerHTML = htmlResult;
+      pageUl.innerHTML = '';
+      let count = finds.length / pageSize;
+      let lis = '';
+      if (start !== 0) {
+        lis += `<span class="fa fa-angle-left" data-i='${start - 1}'></span>`;
+      }
+      for (let i = 0; i < count; i++) {
+        lis += `<span class='${i === start?'current':''}' data-i='${i}'>${i+1}</span>`;     
+      }
+      if (start+1 < count) {
+        lis += `<span class="fa fa-angle-right" data-i='${start+1}'></span>`;  
+      }
+      pageUl.innerHTML = lis;
+    }
+
+    function search(delay) {
+      let timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          let start = Date.now();
+          let segments = searchBox.value.split(' ').filter(c => c != '');
+          if (segments.length <= 0) {
+            return;
+          }
+          finds = [];
+          let htmlResult = '';
+          contents.forEach(content => {
+            let title = content.title;
+            let positions = [];
+            let find = false;
+            segments.forEach((segment) => {
+              if (content.title.includes(segment)) {
+                find = true;
+                positions.push({
+                  start: content.title.indexOf(segment),
+                  count: segment.length
+                })
+              } else if (content.details.includes(segment)) {
+                find = true;
+              }
+            });
+            if (find) {
+              finds.push({
+                title: content.title,
+                link: content.link,
+                positions
+              });
+            }
+          })
+          appendResults(0);
+          statCount.textContent = finds.length;
+          statTimes.textContent = Date.now() - start;
+        }, delay)
+      }
+    }
+    searchBox.addEventListener('input', search(200));
+  }()
+</script>
+
+<input hidden id="copy" />
+<script>
+  !function () {
+    let times = document.querySelectorAll('.publish-time');
+    for (let i = 0; i < times.length; i++) {
+      let date = times[i].dataset.t;
+      let time = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+      if (time < 60) {
+        str = time + '秒之前';
+      } else if (time < 3600) {
+        str = Math.floor(time / 60) + '分钟之前';
+      } else if (time >= 3600 && time < 86400) {
+        str = Math.floor(time / 3600) + '小时之前';
+      } else if (time >= 86400 && time < 259200) {
+        str = Math.floor(time / 86400) + '天之前';
+      } else {
+        str = times[i].textContent;
+      }
+      times[i].textContent = str;
+    }
+  }();
+</script>
+
+<script>
+  let language = '';
+  if (language !== '') {
+    let map = new Map();
+    if (language === 'en') {
+      map.set('search', 'Search');
+      map.set('category', 'Categories');
+      map.set('article', 'Articles');
+      map.set('tag', 'Tags');
+      map.set('top', 'Top');
+      map.set('publish', 'published');
+      map.set('minute', ' minutes');
+      map.set('read-more', 'Read More');
+      map.set('view', 'View');
+      map.set('words', ' words');
+      map.set('category-in', 'category in');
+      map.set('preview', 'Meta');
+      map.set('index', 'Toc');
+      map.set('no-archives', "You haven't created yet");
+      map.set('archives', " articles in total");
+      map.set('cloud-tags', " tags in total");
+      map.set('copyright', "Copyright: ");
+      map.set('author', "Author: ");
+      map.set('link', "Link: ");
+      map.set('leave-message', "Leave a message");
+      map.set('format', "Links Format");
+      map.set('site-name', "Name: ");
+      map.set('site-link', "Link: ");
+      map.set('site-desc', "Desc: ");
+      map.set('stat', " related results, taking ");
+      map.set('stat-time', " ms");
+      map.set('site-img', "Image: ");
+    }
+
+    if (map.size > 0) {
+      let lanElems = document.querySelectorAll('.language');
+      lanElems.forEach(elem => {
+        let lan = elem.dataset.lan, text = map.get(lan);
+        if (elem.__proto__ === HTMLInputElement.prototype) {
+          elem.placeholder = text
+        } else {
+          if (elem.dataset.count) {
+            text = elem.dataset.count + text;
+          }
+          elem.textContent = text;
+        }
+      })
+    }
+  }
+  //拿来主义(真香)^_^，Clipboard 实现摘自掘金 https://juejin.im/post/5aefeb6e6fb9a07aa43c20af
+  window.Clipboard = (function (window, document, navigator) {
+    var textArea,
+      copy;
+
+    // 判断是不是ios端
+    function isOS() {
+      return navigator.userAgent.match(/ipad|iphone/i);
+    }
+    //创建文本元素
+    function createTextArea(text) {
+      textArea = document.createElement('textArea');
+      textArea.value = text;
+      textArea.style.width = 0;
+      textArea.style.height = 0;
+      textArea.clientHeight = 0;
+      textArea.clientWidth = 0;
+      document.body.appendChild(textArea);
+    }
+    //选择内容
+    function selectText() {
+      var range,
+        selection;
+
+      if (isOS()) {
+        range = document.createRange();
+        range.selectNodeContents(textArea);
+        selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textArea.setSelectionRange(0, 999999);
+      } else {
+        textArea.select();
+      }
+    }
+
+    //复制到剪贴板
+    function copyToClipboard() {
+      try {
+        document.execCommand("Copy")
+      } catch (err) {
+        alert("复制错误！请手动复制！")
+      }
+      document.body.removeChild(textArea);
+    }
+
+    copy = function (text) {
+      createTextArea(text);
+      selectText();
+      copyToClipboard();
+    };
+
+    return {
+      copy: copy
+    };
+  })(window, document, navigator);
+
+  function copyCode(e) {
+    if (e.srcElement.tagName === 'SPAN' && e.srcElement.classList.contains('copy-code')) {
+      let code = e.currentTarget.querySelector('code');
+      var text = code.innerText;
+      if (e.srcElement.textContent === '复制成功') {
+        return;
+      }
+      e.srcElement.textContent = '复制成功';
+      (function (elem) {
+        setTimeout(() => {
+          if (elem.textContent === '复制成功') {
+            elem.textContent = '复制代码'
+          }
+        }, 1000);
+      })(e.srcElement)
+      Clipboard.copy(text);
+    }
+  }
+
+  let pres = document.querySelectorAll('pre');
+  pres.forEach(pre => {
+    let code = pre.querySelector('code');
+    let copyElem = document.createElement('span');
+    copyElem.classList.add('copy-code');
+    copyElem.textContent = '复制代码';
+    pre.appendChild(copyElem);
+    pre.onclick = copyCode
+  })
+
+</script>
+<script src="/media/js/motion.js"></script>
+
+
+<script src="/media/js/mouse/peace.js"></script>
+
+
+</html>
