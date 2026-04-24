@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zhang Wei — Developer &amp; Designer</title>
+  <meta name="description" content="Personal blog of Zhang Wei — exploring the intersection of code and design." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232997ff'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-size='18' font-weight='700' fill='white'%3EZ%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">ZW.</a>
+      <div class="nav__links">
+        <a href="about.html" class="nav__link">About</a>
+        <a href="notes.html" class="nav__link">Notes</a>
+        <a href="projects.html" class="nav__link">Projects</a>
+        <!-- Theme Toggle -->
+        <div class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode">
+          <button class="theme-toggle__btn theme-toggle__btn--active" id="btn-dark" title="Dark mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <button class="theme-toggle__btn" id="btn-light" title="Light mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+        </div>
+        <a href="mailto:zhangwei@example.com" class="nav__link nav__link--cta">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero__eyebrow">Developer &amp; Designer</span>
+    <h1 class="hero__title">Building<br><span class="accent">thoughtful</span><br>digital experiences</h1>
+    <p class="hero__subtitle">
+      I craft software that's as elegant to use as it is to maintain.
+      Currently focused on design systems and developer tooling.
+    </p>
+    <div class="hero__actions">
+      <a href="projects.html" class="btn btn--primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+        View Projects
+      </a>
+      <a href="about.html" class="btn btn--secondary">
+        About Me
+      </a>
+    </div>
+    <div class="hero__scroll">
+      <span>SCROLL</span>
+      <div class="hero__scroll-arrow"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Featured Project -->
+  <section class="section">
+    <div class="feature-project reveal">
+      <div class="feature-project__media">
+        <img
+          src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
+          alt="Design System Preview"
+          class="feature-project__img"
+          loading="lazy"
+        />
+      </div>
+      <div class="feature-project__body">
+        <span class="feature-project__eyebrow">Featured Project</span>
+        <h2 class="feature-project__title">Prism — Design System<br>for Modern Teams</h2>
+        <p class="feature-project__desc">
+          An open-source design system with 80+ accessible components,
+          dark mode by default, and first-class support for React &amp; Vue.
+          Used by 200+ product teams worldwide.
+        </p>
+        <div class="feature-project__tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Storybook</span>
+          <span class="tag">Figma</span>
+        </div>
+        <a href="projects.html" class="feature-project__link">
+          Explore the project
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Projects Grid -->
+  <section class="section">
+    <div class="section__header reveal">
+      <p class="section__eyebrow">Portfolio</p>
+      <h2 class="section__title">Things I've Built</h2>
+      <p class="section__desc">
+        A selection of projects spanning design systems, developer tools, and side experiments.
+      </p>
+    </div>
+    <div class="grid grid--3 stagger">
+      <article class="card reveal">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=70" alt="Analytics Dashboard" class="card__image" loading="lazy" />
+        <div class="card__body">
+          <span class="card__tag">Dashboard</span>
+          <h3 class="card__title">Metrics — Real-time Analytics Platform</h3>
+          <p class="card__desc">Live data visualization for SaaS products with customizable widgets and alerting.</p>
+          <div class="card__footer">
+            <span class="card__date">2025 · Web App</span>
+            <a href="projects.html" class="card__link">
+              Details
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=70" alt="AI Writing Tool" class="card__image" loading="lazy" />
+        <div class="card__body">
+          <span class="card__tag">AI Tool</span>
+          <h3 class="card__title">Prose — AI Writing Assistant</h3>
+          <p class="card__desc">Context-aware writing companion that adapts to your voice and style preferences.</p>
+          <div class="card__footer">
+            <span class="card__date">2025 · SaaS</span>
+            <a href="projects.html" class="card__link">
+              Details
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=70" alt="Mobile App" class="card__image" loading="lazy" />
+        <div class="card__body">
+          <span class="card__tag">Mobile</span>
+          <h3 class="card__title">Momentum — Focus &amp; Habit Tracker</h3>
+          <p class="card__desc">Minimalist iOS/Android app with adaptive daily goals and streak system.</p>
+          <div class="card__footer">
+            <span class="card__date">2024 · React Native</span>
+            <a href="projects.html" class="card__link">
+              Details
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="text-center mt-lg">
+      <a href="projects.html" class="btn btn--ghost">
+        View all projects
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Recent Notes -->
+  <section class="section">
+    <div class="section__header reveal">
+      <p class="section__eyebrow">Writing</p>
+      <h2 class="section__title">Recent Notes</h2>
+      <p class="section__desc">
+        Thoughts on design, engineering, and the craft of building software.
+      </p>
+    </div>
+
+    <div class="reveal" style="max-width: 720px; margin: 0 auto;">
+      <div class="note-item">
+        <span class="note-item__date">2026.04.18</span>
+        <div>
+          <h3 class="note-item__title">Why Design Tokens Are the Foundation of a Great Design System</h3>
+          <p class="note-item__excerpt">Design tokens bridge the gap between design files and code. Here is how to structure them for scale.</p>
+          <div class="note-item__tags">
+            <span class="tag">Design Systems</span>
+            <span class="tag">Tokens</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <span class="note-item__date">2026.04.10</span>
+        <div>
+          <h3 class="note-item__title">Building Accessible Components from the Ground Up</h3>
+          <p class="note-item__excerpt">ARIA attributes are a patch, not a fix. Accessibility starts at the design phase, not the QA phase.</p>
+          <div class="note-item__tags">
+            <span class="tag">Accessibility</span>
+            <span class="tag">React</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <span class="note-item__date">2026.03.28</span>
+        <div>
+          <h3 class="note-item__title">The Case for Boring Technology in Startups</h3>
+          <p class="note-item__excerpt">Hot new frameworks are fun. Stable, well-understood tools keep you in business. A pragmatic guide.</p>
+          <div class="note-item__tags">
+            <span class="tag">Engineering</span>
+            <span class="tag">Strategy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <span class="note-item__date">2026.03.15</span>
+        <div>
+          <h3 class="note-item__title">Typography as Interface: Lessons from Apple San Francisco</h3>
+          <p class="note-item__excerpt">How a typeface becomes a design language — and why the details between the letters matter most.</p>
+          <div class="note-item__tags">
+            <span class="tag">Typography</span>
+            <span class="tag">Apple</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-lg">
+      <a href="notes.html" class="btn btn--ghost">
+        Read all notes
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Stats -->
+  <section class="section text-center">
+    <div class="stats reveal">
+      <div>
+        <div class="stat__number">6+</div>
+        <div class="stat__label">Years of Experience</div>
+      </div>
+      <div>
+        <div class="stat__number">40+</div>
+        <div class="stat__label">Projects Shipped</div>
+      </div>
+      <div>
+        <div class="stat__number">12K</div>
+        <div class="stat__label">GitHub Stars</div>
+      </div>
+      <div>
+        <div class="stat__number">200+</div>
+        <div class="stat__label">Design System Users</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__links">
+        <a href="about.html" class="footer__link">About</a>
+        <a href="notes.html" class="footer__link">Notes</a>
+        <a href="projects.html" class="footer__link">Projects</a>
+        <a href="https://github.com" class="footer__link" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://twitter.com" class="footer__link" target="_blank" rel="noopener">Twitter</a>
+        <a href="mailto:zhangwei@example.com" class="footer__link">Email</a>
+      </div>
+      <p class="footer__copy">2026 Zhang Wei. Built with care and curiosity.</p>
+    </div>
+  </footer>
+
+  <script>
+    // --- Theme Toggle ---
+    (function() {
+      const root = document.documentElement;
+      const btnDark = document.getElementById('btn-dark');
+      const btnLight = document.getElementById('btn-light');
+
+      function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (theme === 'dark') {
+          btnDark.classList.add('theme-toggle__btn--active');
+          btnLight.classList.remove('theme-toggle__btn--active');
+        } else {
+          btnLight.classList.add('theme-toggle__btn--active');
+          btnDark.classList.remove('theme-toggle__btn--active');
+        }
+      }
+
+      // Init from localStorage or system preference
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        applyTheme(saved);
+      } else {
+        applyTheme('dark');
+      }
+
+      btnDark.addEventListener('click', () => applyTheme('dark'));
+      btnLight.addEventListener('click', () => applyTheme('light'));
+    })();
+
+    // --- Scroll Reveal ---
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    const links = document.querySelectorAll('.nav__link');
+    links.forEach((link) => {
+      if (link.getAttribute('href') === 'index.html') link.classList.add('active');
+    });
+  </script>
+</body>
+</html>
