@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>艳遇图书馆 — Bishop</title>
+  <meta name="description" content="第一站：布拉格的轻与重
+◦   人：小说主人公托马斯、特瑞萨，米兰昆德拉，卡夫卡
+◦   书：米兰昆德拉《不能承受的生命之轻》，《曼娜回忆录》
+◦   音乐：斯美塔娜《伏尔塔瓦河》，Jay《布拉格广场》
+◦   电影：《布拉格之恋》
+◦   摘录：
+▪   布拉格的妥协精神，为了保存古老的城市建筑，">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230071e3'/><text x='16' y='22' text-anchor='middle' font-size='18' font-weight='bold' fill='white'>B</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+:root{--font-display:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;--font-body:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;--color-bg:#ffffff;--color-bg-secondary:#f5f5f7;--color-text:#1d1d1f;--color-text-secondary:#86868b;--color-text-tertiary:#acacb0;--color-accent:#0071e3;--color-border:rgba(0,0,0,0.08);--color-glass:rgba(255,255,255,0.72);--ease-apple:cubic-bezier(0.25,0.1,0.25,1);--nav-height:56px;--content-max:720px;--content-padding:24px;}
+@media(prefers-color-scheme:dark){:root{--color-bg:#000000;--color-bg-secondary:#0a0a0a;--color-text:#f5f5f7;--color-text-secondary:#98989d;--color-text-tertiary:#636366;--color-border:rgba(255,255,255,0.08);--color-glass:rgba(29,29,31,0.78);}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-body);background:var(--color-bg);color:var(--color-text);-webkit-font-smoothing:antialiased;line-height:1.8;}
+a{color:var(--color-accent);text-decoration:none;}a:hover{text-decoration:underline;}
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-height);z-index:100;background:var(--color-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--color-border);}
+.nav-inner{max-width:800px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 var(--content-padding);}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#34C759,#0071e3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;}
+.nav-title{font-size:18px;font-weight:600;}
+.nav-link{font-size:13px;font-weight:500;color:var(--color-text-secondary);padding:6px 14px;border-radius:8px;transition:all .2s var(--ease-apple);}
+.nav-link:hover{color:var(--color-text);background:var(--color-bg-secondary);text-decoration:none;}
+.article-header{padding:120px var(--content-padding) 60px;max-width:var(--content-max);margin:0 auto;}
+.article-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.article-tag{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--color-accent);}
+.article-date{font-size:13px;color:var(--color-text-tertiary);}
+.article-title{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:20px;}
+.article-divider{width:60px;height:2px;background:linear-gradient(90deg,#0071e3,#34C759);border-radius:2px;}
+.article-content{max-width:var(--content-max);margin:0 auto;padding:0 var(--content-padding) 80px;font-size:17px;line-height:1.8;color:var(--color-text);}
+.article-content p{margin-bottom:1.5em;}
+.article-content h2{font-family:var(--font-display);font-size:24px;font-weight:700;margin:2em 0 0.8em;}
+.article-content h3{font-family:var(--font-display);font-size:20px;font-weight:600;margin:1.8em 0 0.6em;}
+.article-content blockquote{border-left:3px solid var(--color-accent);padding-left:20px;margin:1.5em 0;color:var(--color-text-secondary);font-style:italic;}
+.article-content img{max-width:100%;border-radius:12px;margin:2em 0;}
+.article-content code{font-family:'SF Mono',monospace;background:var(--color-bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.9em;}
+.article-footer{max-width:var(--content-max);margin:0 auto;padding:0 var(--content-padding) 80px;border-top:1px solid var(--color-border);padding-top:40px;}
+.back-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--color-accent);padding:10px 20px;border-radius:8px;border:1px solid var(--color-accent);transition:all .2s var(--ease-apple);}
+.back-btn:hover{background:var(--color-accent);color:#fff;text-decoration:none;}
+.footer{border-top:1px solid var(--color-border);padding:32px var(--content-padding);text-align:center;}
+.footer-copy{font-size:13px;color:var(--color-text-tertiary);}
+@media(max-width:768px){.nav-links{display:none;}.article-title{font-size:28px;}}
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="/" class="nav-brand"><div class="nav-avatar">B</div><span class="nav-title">Bishop</span></a><a href="/" class="nav-link"><i class="fas fa-arrow-left"></i> 返回</a></div></nav>
+<header class="article-header"><div class="article-meta"><span class="article-tag">Thu, 14 Ja</span><span class="article-date">Bishop</span></div><h1 class="article-title">艳遇图书馆</h1><div class="article-divider"></div></header>
+<article class="article-content"><p>第一站：布拉格的轻与重<br />
+◦   人：小说主人公托马斯、特瑞萨，米兰昆德拉，卡夫卡<br />
+◦   书：米兰昆德拉《不能承受的生命之轻》，《曼娜回忆录》<br />
+◦   音乐：斯美塔娜《伏尔塔瓦河》，Jay《布拉格广场》<br />
+◦   电影：《布拉格之恋》<br />
+◦   摘录：<br />
+▪   布拉格的妥协精神，为了保存古老的城市建筑，面临侵略者，宁愿投降，不愿抵抗<br />
+▪   《不》中关于性的描写，“你做爱就像个知识分子”，性友谊</p>
+<p>第二站：北京，那些阳光灿烂的日子<br />
+◦   书：王朔《动物凶猛》<br />
+◦   人：米兰，马军，以及王朔，发生在北京部队大院的故事<br />
+◦   音乐：马斯卡尼《乡村骑士》<br />
+◦   电影：姜文《阳光灿烂的日子》<br />
+◦   摘录：<br />
+▪   过分清汤的女人和过分精致的男人都是乏味的<br />
+▪   西餐里的奶油浓汤-女人</p>
+<p>第三站：香港,似是故人来<br />
+◦   书：刘以鬯《酒徒》《迷楼》《对倒》<br />
+◦   人：梅艳芳、张国荣、王家卫<br />
+◦   音乐：梅艳芳《似是故人来》<br />
+◦   电影：《酒徒》《花样年华》《胭脂扣》<br />
+◦   摘录：</p>
+<p>第四站：在纽约，遇见苏珊•桑塔格<br />
+◦   书：《New Yorker》<br />
+◦   人：利比怀特，苏珊桑塔格，伍迪艾伦<br />
+◦   音乐：《We are the world》<br />
+◦   电影：<br />
+◦   摘录：<br />
+▪   Strand 书店，全球最大的二手书店</p>
+<span id="wordads-inline-marker" style="display: none;"></span><div id="jp-post-flair" class="sharedaddy">
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>相关</em></h3>
+</div></div>	</div>
+
+	
+<div class="author-info">
+	<h2 class="author-heading">发布者</h2>
+	<div class="author-avatar">
+		<img referrerpolicy="no-referrer" alt='未知 的头像' src='https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=56&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=56&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=84&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=112&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=168&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=224&#038;d=identicon&#038;r=G 4x' class='avatar avatar-56' height='56' width='56' decoding='async' />	</div>
+
+	<div class="author-description">
+		<h3 class="author-title">Bishop</h3>
+
+		<p class="author-bio">
+			Lover of Books &amp; Journey &amp; Music			<a class="author-link" href="https://bishopsun1988.wordpress.com/author/bishopsun1988/" rel="author">
+				查看 Bishop 发布的所有文章			</a>
+		</p>
+
+	</div>
+</div>
+
+	<footer class="entry-footer">
+		<span class="posted-on"><span class="screen-reader-text">发表于 </span><a href="https://bishopsun1988.wordpress.com/2021/01/15/%e8%89%b3%e9%81%87%e5%9b%be%e4%b9%a6%e9%a6%86/" rel="bookmark"><time class="entry-date published updated" datetime="2021-01-15T07:49:50+08:00">2021-01-15</time></a></span><span class="byline"><span class="screen-reader-text">作者 </span><span class="author vcard"><a class="url fn n" href="https://bishopsun1988.wordpress.com/author/bishopsun1988/">Bishop</a></span></span><span class="cat-links"><span class="screen-reader-text">分类 </span><a href="https://bishopsun1988.wordpress.com/category/%e4%b9%a6/" rel="category tag">书</a></span><span class="tags-links"><span class="screen-reader-text">标签 </span><a href="https://bishopsun1988.wordpress.com/tag/%e8%89%b3%e9%81%87%e5%9b%be%e4%b9%a6%e9%a6%86/" rel="tag">艳遇图书馆</a>、<a href="https://bishopsun1988.wordpress.com/tag/%e8%ae%b8%e7%9f%a5%e8%bf%9c/" rel="tag">许知远</a>、<a href="https://bishopsun1988.wordpress.com/tag/%e6%92%ad%e5%ae%a2/" rel="tag">播客</a></span>			</footer>
+
+</article>
+
+<div id="comments" class="comments-area">
+
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">留下评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2021/01/15/%e8%89%b3%e9%81%87%e5%9b%be%e4%b9%a6%e9%a6%86/#respond" style="display:none;">取消回复</a></small></h3><form action="https://bishopsun1988.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+
+
+<div class="comment-form__verbum transparent"></article>
+<div class="article-footer"><a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> 返回首页</a></div>
+<footer class="footer"><div class="footer-copy">© 2020–2026 <a href="/">Bishop</a> · Live and Learn.</div></footer>
+</body>
+</html>
