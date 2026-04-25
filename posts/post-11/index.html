@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于“内卷化” — Bishop</title>
+  <meta name="description" content="最近一年有个词被很多互联网IT从业者频繁提及，也许你在网络上或者个人自媒体文章里有所接触，那便是“内卷化”，乍一听，这词儿不是那么容易理解，没关系，看完下面的内容你便理解了。 内卷化一词源于美国人类学家吉尔茨（Clifford Geertz）《农业内卷化》（Agricultural Involuti">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230071e3'/><text x='16' y='22' text-anchor='middle' font-size='18' font-weight='bold' fill='white'>B</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+:root{--font-display:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;--font-body:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;--color-bg:#ffffff;--color-bg-secondary:#f5f5f7;--color-text:#1d1d1f;--color-text-secondary:#86868b;--color-text-tertiary:#acacb0;--color-accent:#0071e3;--color-border:rgba(0,0,0,0.08);--color-glass:rgba(255,255,255,0.72);--ease-apple:cubic-bezier(0.25,0.1,0.25,1);--nav-height:56px;--content-max:720px;--content-padding:24px;}
+@media(prefers-color-scheme:dark){:root{--color-bg:#000000;--color-bg-secondary:#0a0a0a;--color-text:#f5f5f7;--color-text-secondary:#98989d;--color-text-tertiary:#636366;--color-border:rgba(255,255,255,0.08);--color-glass:rgba(29,29,31,0.78);}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-body);background:var(--color-bg);color:var(--color-text);-webkit-font-smoothing:antialiased;line-height:1.8;}
+a{color:var(--color-accent);text-decoration:none;}a:hover{text-decoration:underline;}
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-height);z-index:100;background:var(--color-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--color-border);}
+.nav-inner{max-width:800px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 var(--content-padding);}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#34C759,#0071e3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;}
+.nav-title{font-size:18px;font-weight:600;}
+.nav-link{font-size:13px;font-weight:500;color:var(--color-text-secondary);padding:6px 14px;border-radius:8px;transition:all .2s var(--ease-apple);}
+.nav-link:hover{color:var(--color-text);background:var(--color-bg-secondary);text-decoration:none;}
+.article-header{padding:120px var(--content-padding) 60px;max-width:var(--content-max);margin:0 auto;}
+.article-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.article-tag{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--color-accent);}
+.article-date{font-size:13px;color:var(--color-text-tertiary);}
+.article-title{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:20px;}
+.article-divider{width:60px;height:2px;background:linear-gradient(90deg,#0071e3,#34C759);border-radius:2px;}
+.article-content{max-width:var(--content-max);margin:0 auto;padding:0 var(--content-padding) 80px;font-size:17px;line-height:1.8;color:var(--color-text);}
+.article-content p{margin-bottom:1.5em;}
+.article-content h2{font-family:var(--font-display);font-size:24px;font-weight:700;margin:2em 0 0.8em;}
+.article-content h3{font-family:var(--font-display);font-size:20px;font-weight:600;margin:1.8em 0 0.6em;}
+.article-content blockquote{border-left:3px solid var(--color-accent);padding-left:20px;margin:1.5em 0;color:var(--color-text-secondary);font-style:italic;}
+.article-content img{max-width:100%;border-radius:12px;margin:2em 0;}
+.article-content code{font-family:'SF Mono',monospace;background:var(--color-bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.9em;}
+.article-footer{max-width:var(--content-max);margin:0 auto;padding:0 var(--content-padding) 80px;border-top:1px solid var(--color-border);padding-top:40px;}
+.back-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--color-accent);padding:10px 20px;border-radius:8px;border:1px solid var(--color-accent);transition:all .2s var(--ease-apple);}
+.back-btn:hover{background:var(--color-accent);color:#fff;text-decoration:none;}
+.footer{border-top:1px solid var(--color-border);padding:32px var(--content-padding);text-align:center;}
+.footer-copy{font-size:13px;color:var(--color-text-tertiary);}
+@media(max-width:768px){.nav-links{display:none;}.article-title{font-size:28px;}}
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="/" class="nav-brand"><div class="nav-avatar">B</div><span class="nav-title">Bishop</span></a><a href="/" class="nav-link"><i class="fas fa-arrow-left"></i> 返回</a></div></nav>
+<header class="article-header"><div class="article-meta"><span class="article-tag">Thu, 01 Oc</span><span class="article-date">Bishop</span></div><h1 class="article-title">关于“内卷化”</h1><div class="article-divider"></div></header>
+<article class="article-content"><p class="wp-block-paragraph">最近一年有个词被很多互联网IT从业者频繁提及，也许你在网络上或者个人自媒体文章里有所接触，那便是“内卷化”，乍一听，这词儿不是那么容易理解，没关系，看完下面的内容你便理解了。</p>
+
+
+
+<p class="wp-block-paragraph">内卷化一词源于美国人类学家吉尔茨（Clifford Geertz）《农业内卷化》（Agricultural Involution）。根据吉尔茨的定义，“内卷化”是指一种社会或文化模式在某一发展阶段达到一种确定的形式后，便停滞不前或无法转化为另一种高级模式的现象。黄宗智在《长江三角洲小农家庭与乡村发展》中，把内卷化这一概念用于中国经济发展与社会变迁的研究，他把通过在有限的土地上投入大量的劳动力来获得总产量增长的方式，即边际效益递减的方式，称为没有发展的增长即“内卷化”。</p>
+
+
+
+<p class="wp-block-paragraph">有内卷化，便有对应的内卷化效应。那什么又是内卷化效应呢？</p>
+
+
+
+<p class="wp-block-paragraph">内卷化效应就是长期从事一项相同的工作，并且保持在一定的层面，没有任何变化和改观。这种行为通常是一种自我懈怠，自我消耗。是近年来在中国社会学研究领域被认为“和中国社会的某些特色联系密切且使用频率较高、影响较广泛的概念”。</p>
+
+
+
+<p class="wp-block-paragraph">其实写到这儿，我自己也深感自己也长期处于内卷化效应中，进入公司七年，一直处在底层，打拼在一线，没有任何起色，多次反省后，也认为自己比较懈怠，长此以往，精力不断被消耗，工作激情不断被淡化，对工作的态度也是逐渐淡漠，我相信，在当前社会，还有很多与我类似的人，一直处于内卷化效应的洪流无法自拔。</p>
+
+
+
+<p class="wp-block-paragraph">关于内卷化效应，还有一个起源的故事可以分享给大家。</p>
+
+
+
+<p class="wp-block-paragraph">20世纪60年代末，一位名叫利福德·盖尔茨的美国人类文化学家，曾在爪哇岛生活过。这位学者，无心观赏岛上美景，只潜心研究当地的农耕生活。他眼中看到的都是犁耙收割，日复一日，年复一年，原生态农业在维持着田园景色的同时，长期停留在一种简单重复、没有进步的轮回状态。这位学者把这种现象冠名为“内卷化”。 此后，这一概念便被广泛应用到了政治、经济、社会、文化及其他学术研究中。“内卷化”作为一个学术概念，意指一个社会或组织既无突变式的发展，也无渐进式的增长，长期以来，只是在一个简单层次上自我重复。作为学术概念，其实并不深奥，观察我们的现实生活，就有很多这样的“内卷化现象”。</p>
+
+
+
+<p class="wp-block-paragraph">1996年另一个美国学者杜赞奇提出“国家政权的内卷化的概念”。“国家政权的内卷化，意味着国家机构不是靠提高现有的组织机构的效能来推动社会发展，而是靠扩大非正式机构，把它们内卷于正式组织之中来行使权力。”</p>
+
+
+
+<p class="wp-block-paragraph">再来一个更加形象生动的例子。</p>
+
+
+
+<p class="wp-block-paragraph">中央电视台记者到陕北采访一个放羊的男孩，曾留下这样一段经典对话：</p>
+
+
+
+<p class="wp-block-paragraph">“为什么要放羊？”</p>
+
+
+
+<p class="wp-block-paragraph">“为了卖钱。”</p>
+
+
+
+<p class="wp-block-paragraph">“卖钱做什么？”</p>
+
+
+
+<p class="wp-block-paragraph">“娶媳妇。”</p>
+
+
+
+<p class="wp-block-paragraph">“娶媳妇做什么呢？”</p>
+
+
+
+<p class="wp-block-paragraph">“生孩子。”</p>
+
+
+
+<p class="wp-block-paragraph">“生孩子为什么？”</p>
+
+
+
+<p class="wp-block-paragraph">“放羊。”</p>
+
+
+
+<p class="wp-block-paragraph">这段对话，就形象地为这种“内卷化”现象做了注解。</p>
+
+
+
+<p class="wp-block-paragraph">社会生活中这种现象可以说无处不在。</p>
+
+
+
+<p class="wp-block-paragraph">大到一个社会，小到一个组织，微观到一个人，一旦陷入这种状态，就如同车入泥潭，原地踏步，裹足不前，无谓地耗费着有限的资源，重复着简单的脚步，浪费着宝贵的人生。我国农村一些地方，特别是老少边穷地区，改革开放30年过去了，农民兄弟过的仍然是三亩地一头牛，老婆孩子热炕头的农耕生活；同样在一个单位供职，有的人几年一个台阶，士别几日就当刮目相看，而另一些人却原地不动，多少年过去了却一切照旧。</p>
+
+
+
+<p class="wp-block-paragraph">一些企业，特别是中小企业和民营企业，这种内卷化现象尤其突出。一些民营企业内部实行家族化管理，重要岗位，不是七大姑，就是八大姨分兵把口，管理哲学是“打仗亲兄弟，上阵父子兵”，用自己的人放心。于是，在企业内部，鸡犬之声相闻，老死不相往来，外部的新鲜空气难以吹进来，真正优秀的人才也吸引不进来，措施和办法因循守旧。十几年乃至几十年过去了，厂房依旧，机器依旧，规模依旧，各方面都没有多大变化。企业进入了一种典型的“内卷化状态”。</p>
+
+
+
+<p class="has-dark-gray-color has-text-color wp-block-paragraph"><amp-fit-text layout="fixed-height" min-font-size="6" max-font-size="72" height="80">无论是社会组织还是个人，进入内卷化状态，根本原因就在于精神状态和思想观念。人们常说，信心决定命运，观念决定出路。一个人如果总是自怨自艾，不思改变，不求进取，不谋开拓，民无信心，军无斗志，只能是原地不动，还有可能倒退。总是因陋就简，循规蹈矩，按部就班，只能进入周而复始的轮回状态。两千年的小农意识，生产的只能是两千年的自然经济，不可能产生出市场经济和现代经济。</amp-fit-text></p>
+<span id="wordads-inline-marker" style="display: none;"></span><div id="jp-post-flair" class="sharedaddy">
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>相关</em></h3>
+</div></div>	</div>
+
+	
+<div class="author-info">
+	<h2 class="author-heading">发布者</h2>
+	<div class="author-avatar">
+		<img referrerpolicy="no-referrer" alt='未知 的头像' src='https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=56&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=56&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=84&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=112&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=168&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=224&#038;d=identicon&#038;r=G 4x' class='avatar avatar-56' height='56' width='56' decoding='async' />	</div>
+
+	<div class="author-description">
+		<h3 class="author-title">Bishop</h3>
+
+		<p class="author-bio">
+			Lover of Books &amp; Journey &amp; Music			<a class="author-link" href="https://bishopsun1988.wordpress.com/author/bishopsun1988/" rel="author">
+				查看 Bishop 发布的所有文章			</a>
+		</p>
+
+	</div>
+</div>
+
+	<footer class="entry-footer">
+		<span class="posted-on"><span class="screen-reader-text">发表于 </span><a href="https://bishopsun1988.wordpress.com/2020/10/02/%e5%85%b3%e4%ba%8e%e5%86%85%e5%8d%b7%e5%8c%96/" rel="bookmark"><time class="entry-date published updated" datetime="2020-10-02T01:35:41+08:00">2020-10-02</time></a></span><span class="byline"><span class="screen-reader-text">作者 </span><span class="author vcard"><a class="url fn n" href="https://bishopsun1988.wordpress.com/author/bishopsun1988/">Bishop</a></span></span><span class="cat-links"><span class="screen-reader-text">分类 </span><a href="https://bishopsun1988.wordpress.com/category/%e6%97%a5%e8%ae%b0/" rel="category tag">日记</a></span><span class="tags-links"><span class="screen-reader-text">标签 </span><a href="https://bishopsun1988.wordpress.com/tag/%e5%86%85%e5%8d%b7%e5%8c%96/" rel="tag">内卷化</a></span>			</footer>
+
+</article>
+
+<div id="comments" class="comments-area">
+
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">留下评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2020/10/02/%e5%85%b3%e4%ba%8e%e5%86%85%e5%8d%b7%e5%8c%96/#respond" style="display:none;">取消回复</a></small></h3><form action="https://bishopsun1988.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+
+
+<div class="comment-form__verbum transparent"></article>
+<div class="article-footer"><a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> 返回首页</a></div>
+<footer class="footer"><div class="footer-copy">© 2020–2026 <a href="/">Bishop</a> · Live and Learn.</div></footer>
+</body>
+</html>
