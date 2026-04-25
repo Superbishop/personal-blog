@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>淘书记续 — Bishop</title>
+  <meta name="description" content="为了方便成都“书迷”们淘书，决定制作一份成都淘书地图，上次去了送仙桥古玩交易市场，此次先后去了成都古玩交易市场第五街，也就是高升桥罗马广场，冲着网友推荐的淘书斋与芥子书店去。紧接着是府青立交玛塞城古玩收藏市场，这地方网上很少或者从未提及，算是一个小更新。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230071e3'/><text x='16' y='22' text-anchor='middle' font-size='18' font-weight='bold' fill='white'>B</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+:root{--font-display:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;--font-body:-apple-system,BlinkMacSystemFont,'SF Pro Text',sans-serif;--color-bg:#ffffff;--color-bg-secondary:#f5f5f7;--color-text:#1d1d1f;--color-text-secondary:#86868b;--color-text-tertiary:#acacb0;--color-accent:#0071e3;--color-border:rgba(0,0,0,0.08);--color-glass:rgba(255,255,255,0.72);--ease-apple:cubic-bezier(0.25,0.1,0.25,1);--nav-height:56px;--content-max:720px;--content-padding:24px;}
+@media(prefers-color-scheme:dark){:root{--color-bg:#000000;--color-bg-secondary:#0a0a0a;--color-text:#f5f5f7;--color-text-secondary:#98989d;--color-text-tertiary:#636366;--color-border:rgba(255,255,255,0.08);--color-glass:rgba(29,29,31,0.78);}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-body);background:var(--color-bg);color:var(--color-text);-webkit-font-smoothing:antialiased;line-height:1.8;}
+a{color:var(--color-accent);text-decoration:none;}a:hover{text-decoration:underline;}
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-height);z-index:100;background:var(--color-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--color-border);}
+.nav-inner{max-width:800px;margin:0 auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 var(--content-padding);}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#34C759,#0071e3);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;}
+.nav-title{font-size:18px;font-weight:600;}
+.nav-link{font-size:13px;font-weight:500;color:var(--color-text-secondary);padding:6px 14px;border-radius:8px;transition:all .2s var(--ease-apple);}
+.nav-link:hover{color:var(--color-text);background:var(--color-bg-secondary);text-decoration:none;}
+.article-header{padding:120px var(--content-padding) 60px;max-width:var(--content-max);margin:0 auto;}
+.article-meta{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.article-tag{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--color-accent);}
+.article-date{font-size:13px;color:var(--color-text-tertiary);}
+.article-title{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);font-weight:700;letter-spacing:-1px;line-height:1.15;margin-bottom:20px;}
+.article-divider{width:60px;height:2px;background:linear-gradient(90deg,#0071e3,#34C759);border-radius:2px;}
+.article-content{max-width:var(--content-max);margin:0 auto;padding:0 var(--content-padding) 80px;font-size:17px;line-height:1.8;color:var(--color-text);}
+.article-content p{margin-bottom:1.5em;}
+.article-content h2{font-family:var(--font-display);font-size:24px;font-weight:700;margin:2em 0 0.8em;}
+.article-content h3{font-family:var(--font-display);font-size:20px;font-weight:600;margin:1.8em 0 0.6em;}
+.article-content blockquote{border-left:3px solid var(--color-accent);padding-left:20px;margin:1.5em 0;color:var(--color-text-secondary);font-style:italic;}
+.article-content img{max-width:100%;border-radius:12px;margin:2em 0;}
+.article-content code{font-family:'SF Mono',monospace;background:var(--color-bg-secondary);padding:2px 6px;border-radius:4px;font-size:0.9em;}
+.article-footer{max-width:var(--content-max);margin:0 auto;padding:0 var(--content-padding) 80px;border-top:1px solid var(--color-border);padding-top:40px;}
+.back-btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--color-accent);padding:10px 20px;border-radius:8px;border:1px solid var(--color-accent);transition:all .2s var(--ease-apple);}
+.back-btn:hover{background:var(--color-accent);color:#fff;text-decoration:none;}
+.footer{border-top:1px solid var(--color-border);padding:32px var(--content-padding);text-align:center;}
+.footer-copy{font-size:13px;color:var(--color-text-tertiary);}
+@media(max-width:768px){.nav-links{display:none;}.article-title{font-size:28px;}}
+  </style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner"><a href="/" class="nav-brand"><div class="nav-avatar">B</div><span class="nav-title">Bishop</span></a><a href="/" class="nav-link"><i class="fas fa-arrow-left"></i> 返回</a></div></nav>
+<header class="article-header"><div class="article-meta"><span class="article-tag">Thu, 31 Ma</span><span class="article-date">Bishop</span></div><h1 class="article-title">淘书记续</h1><div class="article-divider"></div></header>
+<article class="article-content"><ul>
+<li>写在前面的话</li>
+</ul>
+<p>为了方便成都“书迷”们淘书，决定制作一份成都淘书地图，上次去了送仙桥古玩交易市场，此次先后去了成都古玩交易市场第五街，也就是高升桥罗马广场，冲着网友推荐的淘书斋与芥子书店去。紧接着是府青立交玛塞城古玩收藏市场，这地方网上很少或者从未提及，算是一个小更新。</p>
+<p>好了，开始此次淘书之旅吧。</p>
+<ul>
+<li>成都古玩交易市场第五街</li>
+</ul>
+<p>原本上周约定一朋友也是铁杆书迷共同此次的淘书之旅，怎奈有事，只能我独自出行，不过还是有惊喜，随后讲。本人家住中和，所以早早定好出行时间与公交线路，其实同去送仙桥路线完全一致，只不过时间稍微短点。早上八点打点好一切，鉴于上次手提一大捆书累得够呛，此次背上双肩包，希冀满载而归。同时，带着上次淘回的《上尉的女儿》在公交车上打发时间。不得不说，有本书在手上，一个半小时的车程，变得不再枯燥漫长。只是，现在坐在公交或地铁上手捧一本实体书阅读，总会被人觉得在装x，不禁感叹时代的变化，看书都被遭歧视。</p>
+<p>来到罗马广场，也就是此次的第一个目的地，一眼望去，全是古玩摊贩，金石玉器，古币旧钞，书画墨宝，壮观之甚。沿着街道小巷，一条条慢慢寻找，偶尔能看到商贩有卖旧书，但量稀少，主要还是以古玩为主。好不容易看到一着藏袍的人摆了二十来本旧书，发现了冯梦龙的《警世通言》，而且上一位购书者用书皮给包着，用毛笔在封面写上书名、作者与出版社，可见珍惜得很，虽然是福建人民出版社出版，不是我中意的出版社，但冲着这股惜书爱书的劲头，毫不犹豫收入囊中，且老板开价极其公道。带着好玩的心态，短暂停留于各个古玩摊前，听着卖家与摊贩的生意经，一个个架势上都不认输，卖家自备鉴别工具，如放大镜，查看各古玩的裂缝以及蛛丝马迹，以求在真假鉴别和讨价还价中提供较好的砍价理由。脑中闪现马亲王《古董局中局》里的各种交易情节，当然也想到里面贯穿始终的一句话“鉴古容易鉴人难”。可叹我等连基本的鉴古还未入门，更何谈鉴人。兜兜转转三条街，大大小小的门市，琳琅满目，但始终看不到淘书斋与芥子书店。心中开始产生怀疑是否已搬走。在穿过最后一条巷子后，总算看到一家店堆满了旧书，但没有招牌，门上也贴着“门市转让”，根据网友提供的照片看来，这便是淘书斋无疑。只是感叹不多久该店也会转让了。进入店内，看见的不是我预想的七十几岁老者，而是一中年，先不管，自己开始淘书，顺便给朋友发了所谓的“淘书直播”照片，然后大概讲了现场情况，没想到该友冲动异常，直接从新都开车过来，让我等着。啊，淘书的乐趣只有真正爱书之人才懂得吧，为其冲动也毫无关系。</p>
+<p>该店子不大，最多二十来平，但书架很高，一面墙摆得满满，总共五层，最上层都是大部头书籍，比如《史记》、四大名著、各朝代历史演义等。进门最右侧整面墙历史文献资料占据大半，最下两层有古代文学丛书，明清小说以及国学。紧接着店中间两排主要是地方志、历史游记，也包括古代明清小说，工具用书，比如辞典辞海啊，明显该店分类不清，比较杂乱，自己只得一本本慢慢看过去，选过去。老板背后一面墙全是有些年头的线装古籍，且隔着一玻璃柜，我在想，那样放着是做展示用吧，完全没法挑选，尽管那些古籍的确很贵，一般人不会买，毕竟我等不是做古籍收藏，回头又一想，应该是害怕翻阅的人多了，容易损坏，品相贬值，价值随之下降颇多。呆了差不多俩小时，逛遍所有书架，没找到最中意的书籍，心里很是烦躁，最后选了一本偏冷门的《一层楼》，作者为19世纪内蒙作家尹湛纳希，甲乙木译，估计大部分人都未曾听过此书此人，有兴趣者可以上网搜索，暂不赘述。付钱间隙，询问老板那位七十几岁的老者，原来搬去了玛塞城，且是他们在成都的旗舰店，朋友与我都未挑选到中意的书，心有不甘，遂决定驱车前往玛塞城。</p>
+<ul>
+<li>玛塞城古玩收藏交易市场</li>
+</ul>
+<p>兜兜转转了半小时来到玛塞城，此处其实就是一高档小区中心，负一楼被开发为古玩收藏交易市场。进入里面，冷清异常，大概是我们来的时间太晚，下午两点多，很多商家打烊或者直接未开门做生意，经过一老大爷介绍，此处每周二、四、六开市，一早许多摊贩在此摆摊贩售古玩旧书，我们来得并不是时候。而且据说是为了跟送仙桥错开（送仙桥每周三、日开市），想来成都淘书者是可以一周都有地儿淘书的，只需把握好时间。转了十来分钟，发现几个书店和摊贩，比如缥缃书局（经后来孔夫子网站查询，成都口碑排行榜前五），芥子书店，以及我们目标中的淘书斋。淘书斋比我想象中的大太多（废话，这可是人家的旗舰店），看店者为老爷子的孙子，老爷子在隔壁午休。店里藏书种类丰富，小到旧书刊杂志及小人书，大到线装古籍。我等俗人，没有太高雅的癖好，择一本《豆棚闲话》，以及全套《说岳全传》，皆出版于上海古籍出版社。本想淘网格本杨绛所译的《堂吉诃德》，遍寻无果，看来此次与该书无缘，留作下次吧。</p>
+<ul>
+<li>感慨</li>
+</ul>
+<p>淘书讲求书缘，有缘，遇上了，则不惜重金购之。无缘，勿强求，坚信未来可期。</p>
+<span id="wordads-inline-marker" style="display: none;"></span><div id="jp-post-flair" class="sharedaddy">
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>相关</em></h3>
+</div></div>	</div>
+
+	
+<div class="author-info">
+	<h2 class="author-heading">发布者</h2>
+	<div class="author-avatar">
+		<img referrerpolicy="no-referrer" alt='未知 的头像' src='https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=56&#038;d=identicon&#038;r=G' srcset='https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=56&#038;d=identicon&#038;r=G 1x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=84&#038;d=identicon&#038;r=G 1.5x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=112&#038;d=identicon&#038;r=G 2x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=168&#038;d=identicon&#038;r=G 3x, https://0.gravatar.com/avatar/615f0d18ab2d6b4ad3d937942e0615afabcdd580726ed961ed915db47225381e?s=224&#038;d=identicon&#038;r=G 4x' class='avatar avatar-56' height='56' width='56' decoding='async' />	</div>
+
+	<div class="author-description">
+		<h3 class="author-title">Bishop</h3>
+
+		<p class="author-bio">
+			Lover of Books &amp; Journey &amp; Music			<a class="author-link" href="https://bishopsun1988.wordpress.com/author/bishopsun1988/" rel="author">
+				查看 Bishop 发布的所有文章			</a>
+		</p>
+
+	</div>
+</div>
+
+	<footer class="entry-footer">
+		<span class="posted-on"><span class="screen-reader-text">发表于 </span><a href="https://bishopsun1988.wordpress.com/2018/05/31/%e6%b7%98%e4%b9%a6%e8%ae%b0%e7%bb%ad/" rel="bookmark"><time class="entry-date published" datetime="2018-05-31T11:29:21+08:00">2018-05-31</time><time class="updated" datetime="2018-11-14T11:30:06+08:00">2018-11-14</time></a></span><span class="byline"><span class="screen-reader-text">作者 </span><span class="author vcard"><a class="url fn n" href="https://bishopsun1988.wordpress.com/author/bishopsun1988/">Bishop</a></span></span><span class="cat-links"><span class="screen-reader-text">分类 </span><a href="https://bishopsun1988.wordpress.com/category/%e6%97%a5%e8%ae%b0/" rel="category tag">日记</a>、<a href="https://bishopsun1988.wordpress.com/category/%e4%b8%aa%e4%ba%ba%e7%94%9f%e6%b4%bb/" rel="category tag">个人生活</a>、<a href="https://bishopsun1988.wordpress.com/category/%e4%b9%a6/" rel="category tag">书</a></span><span class="tags-links"><span class="screen-reader-text">标签 </span><a href="https://bishopsun1988.wordpress.com/tag/%e7%8e%9b%e5%a1%9e%e5%9f%8e/" rel="tag">玛塞城</a>、<a href="https://bishopsun1988.wordpress.com/tag/%e7%bd%97%e9%a9%ac%e5%b9%bf%e5%9c%ba/" rel="tag">罗马广场</a>、<a href="https://bishopsun1988.wordpress.com/tag/%e6%88%90%e9%83%bd/" rel="tag">成都</a>、<a href="https://bishopsun1988.wordpress.com/tag/%e6%b7%98%e4%b9%a6%e8%ae%b0/" rel="tag">淘书记</a></span>			</footer>
+
+</article>
+
+<div id="comments" class="comments-area">
+
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">留下评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2018/05/31/%e6%b7%98%e4%b9%a6%e8%ae%b0%e7%bb%ad/#respond" style="display:none;">取消回复</a></small></h3><form action="https://bishopsun1988.wordpress.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+
+
+<div class="comment-form__verbum transparent"></article>
+<div class="article-footer"><a href="/" class="back-btn"><i class="fas fa-arrow-left"></i> 返回首页</a></div>
+<footer class="footer"><div class="footer-copy">© 2020–2026 <a href="/">Bishop</a> · Live and Learn.</div></footer>
+</body>
+</html>
